@@ -46,6 +46,45 @@ public:
 		glPopMatrix();
 	};
 
+	void draw(float x, float y, float z) {
+		glPushMatrix(); {
+			glTranslatef(0.0, 0.0, z);
+			drawCubeFace();
+		}
+		glPopMatrix();
+		glPushMatrix(); {
+			glTranslatef(x, 0.0, 0.0);
+			glRotatef(90, 0, 1, 0);
+			drawCubeFace();
+		}
+		glPopMatrix();
+		glPushMatrix(); {
+			glTranslatef(0.0, 0.0, -z);
+			glRotatef(180, 0, 1, 0);
+			drawCubeFace();
+		}
+		glPopMatrix();
+		glPushMatrix(); {
+			glTranslatef(-x, 0.0, 0.0);
+			glRotatef(270, 0, 1, 0);
+			drawCubeFace();
+		}
+		glPopMatrix();
+		glPushMatrix(); {
+			glTranslatef(0, y, 0.0);
+			glRotatef(270, 1, 0, 0);
+			drawCubeFace();
+		}
+		glPopMatrix();
+		glPushMatrix(); {
+			glTranslatef(0.0, -y, 0.0);
+			glRotatef(90, 1, 0, 0);
+			drawCubeFace();
+		}
+		glPopMatrix();
+	};
+
+
 
 	void drawNormal() {
 		glPushMatrix(); {
