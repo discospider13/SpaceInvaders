@@ -245,7 +245,7 @@ void myGlutDisplay(void)
 	Matrix projection = camera->GetProjectionMatrix();
 	glLoadMatrixd(projection.unpack());
 
-	camera->Orient(Point(eyeX, eyeY, eyeZ), Vector(lookX, lookY, lookZ), Vector(0, 1, 0));
+	camera->Orient(Point(eyeX, eyeY, eyeZ), Point(0, 0, 0), Vector(0, 1, 0));
 	camera->RotateV(camRotV);
 	camera->RotateU(camRotU);
 	camera->RotateW(camRotW);
@@ -397,14 +397,12 @@ void keyboardInput(unsigned char key, int x, int y)
 		radAngle = (PI / 180) * camAngle;
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
-		camera->Orient(Point(eyeX, eyeY, eyeZ), Point(0, 0, 0), Vector(0, 1, 0));
 		break;
 	case 'e':
 		camAngle--;
 		radAngle = (PI / 180) * camAngle;
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
-		camera->Orient(Point(eyeX, eyeY, eyeZ), Point(0, 0, 0), Vector(0, 1, 0));
 		break;
 	}
 }
