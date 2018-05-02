@@ -16,10 +16,8 @@
 using namespace std;
 
 /** These are the live variables passed into GLUI ***/
-int  wireframe = 0;
-int  fillObj = 1;
-int  segmentsX = 20;
-int  segmentsY = 20;
+int  segmentsX = 1;
+int  segmentsY = 1;
 
 int	 camRotU = 0;
 int	 camRotV = 0;
