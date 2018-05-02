@@ -155,7 +155,6 @@ void myGlutDisplay(void)
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//plane->draw();
 	glDisable(GL_LIGHTING);
 
 	camera->RotateV(-camRotV);
@@ -175,13 +174,15 @@ void keyboardInput(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 'q': 
+	case 'q':
+		//rotate camera left
 		camAngle++;
 		radAngle = (PI / 180) * camAngle;
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
 		break;
 	case 'e':
+		//rotate camera right
 		camAngle--;
 		radAngle = (PI / 180) * camAngle;
 		eyeZ = cos(radAngle) * 5;
