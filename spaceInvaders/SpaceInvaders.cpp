@@ -174,35 +174,51 @@ void onExit()
 	delete camera;
 }
 
+void rotateCameraLeft() {
+	camAngle++;
+	radAngle = (PI / 180) * camAngle;
+	eyeZ = cos(radAngle) * 5;
+	eyeX = sin(radAngle) * 5;
+}
+
+void rotateCameraRight() {
+	camAngle--;
+	radAngle = (PI / 180) * camAngle;
+	eyeZ = cos(radAngle) * 5;
+	eyeX = sin(radAngle) * 5;
+}
+
 void keyboardInput(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
 	case 'q':
 		//rotate camera left
-		camAngle++;
-		radAngle = (PI / 180) * camAngle;
-		eyeZ = cos(radAngle) * 5;
-		eyeX = sin(radAngle) * 5;
+		rotateCameraLeft();
 		break;
 	case 'e':
 		//rotate camera right
-		camAngle--;
-		radAngle = (PI / 180) * camAngle;
-		eyeZ = cos(radAngle) * 5;
-		eyeX = sin(radAngle) * 5;
+		rotateCameraRight();
 		break;
 	case 'a':
 		//move player left
-		player->move(-player_speed);
+		player->move(player_speed, 1);
 		break;
 	case 'd':
 		//move player right
-		player->move(player_speed);
+		player->move(player_speed, 0);
+		break;
+	case 'w':
+		//move player up
+		player->move(player_speed, 2);
+		break;
+	case 's':
+		//move player down
+		player->move(player_speed, 3);
 		break;
 	case 32:
 		//fire laser
-		lasers.create(player_x, player_y, player_z, true);
+		lasers.create(player->getLocX(), player->getLocY(), player->getLocZ(), false);
 		break;
 	}
 }
