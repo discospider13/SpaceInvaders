@@ -13,7 +13,7 @@
 #include "Camera.h"
 #include "Plane.h"
 #include "Player.h"
-#include "Laser.h"
+#include "LaserControl.h"
 
 using namespace std;
 
@@ -52,7 +52,7 @@ string gameTextSpace = " ";
 
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
-Laser* laser;
+LaserControl lasers;
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -153,6 +153,8 @@ void myGlutDisplay(void)
 
 	//plane->draw();
 	player->draw();
+	lasers.move();
+	lasers.draw();
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -200,9 +202,7 @@ void keyboardInput(unsigned char key, int x, int y)
 		break;
 	case 32:
 		//fire laser
-		cout << "FIRE!!!!" << endl;
-		laser = new Laser(player->getLocX(), player->getLocY(), player->getLocZ(), 0.5);
-		delete laser;
+		lasers.create(player_x, player_y, player_z, true);
 		break;
 	}
 }
