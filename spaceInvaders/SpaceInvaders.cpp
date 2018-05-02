@@ -11,12 +11,15 @@
 #include "Shape.h"
 #include "Cube.h"
 #include "Camera.h"
+#include "Plane.h"
 
 using namespace std;
 
 /** These are the live variables passed into GLUI ***/
-int  segmentsX = 1;
-int  segmentsY = 1;
+int  wireframe = 0;
+int  fillObj = 1;
+int  segmentsX = 20;
+int  segmentsY = 20;
 
 int	 camRotU = 0;
 int	 camRotV = 0;
@@ -44,6 +47,7 @@ string gameTextSpace = " ";
 
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
+Plane* plane = new Plane(10.0, 0.1, 10.0);
 Shape* shape = NULL;
 Camera* camera = new Camera();
 
@@ -140,12 +144,15 @@ void myGlutDisplay(void)
 	glColor3f(1.0, 0.0, 0.0);
 	glDisable(GL_COLOR_MATERIAL);
 
+	plane->draw();
+
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	shape = cube;
-	shape->setSegments(segmentsX, segmentsY);
-	shape->draw();
+	//shape = cube;
+	//shape->setSegments(1, 1);
+	//shape->draw();
+	
 	glDisable(GL_LIGHTING);
 
 	camera->RotateV(-camRotV);
