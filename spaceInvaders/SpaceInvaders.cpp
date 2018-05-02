@@ -33,7 +33,7 @@ float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
 
-float player_speed = 0.1;
+float player_speed = 0.05;
 float player_x = 0.0;
 float player_y = 0.0;
 float player_z = 0.0;
