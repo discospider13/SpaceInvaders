@@ -15,10 +15,8 @@
 using namespace std;
 
 /** These are the live variables passed into GLUI ***/
-int  wireframe = 0;
-int  fillObj = 1;
-int  segmentsX = 20;
-int  segmentsY = 20;
+int  segmentsX = 1;
+int  segmentsY = 1;
 
 int	 camRotU = 0;
 int	 camRotV = 0;
@@ -146,7 +144,7 @@ void myGlutDisplay(void)
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	shape = cube;
-	shape->setSegments(1, 1);
+	shape->setSegments(segmentsX, segmentsY);
 	shape->draw();
 	glDisable(GL_LIGHTING);
 
