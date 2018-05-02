@@ -6,12 +6,14 @@
 class Player : public Shape {
 private:
 	float loc_x, loc_y, loc_z;
+	float speed;
 
 public:
-	Player(float x, float y, float z) {
+	Player(float x, float y, float z, float speed) {
 		this->loc_x = x;
 		this->loc_y = y;
 		this->loc_z = z;
+		this->speed = speed;
 	}
 
 	void draw() {
@@ -24,6 +26,10 @@ public:
 
 	void drawNormal() {
 
+	}
+
+	void move(float dist) {
+		this->loc_x += dist;
 	}
 
 	void setLocX(float x) {

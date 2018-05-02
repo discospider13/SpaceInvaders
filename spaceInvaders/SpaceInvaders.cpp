@@ -33,6 +33,11 @@ float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
 
+float player_speed = 0.1;
+float player_x = 0.0;
+float player_y = 0.0;
+float player_z = 0.0;
+
 /** These are GLUI control panel objects ***/
 int  main_window;
 string gameText1 = "Welcome to Space Invaders!";
@@ -47,7 +52,7 @@ string gameTextSpace = " ";
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
 Plane* plane = new Plane(10.0, 0.1, 10.0);
-Player* player = new Player(0.0, 0.0, 0.0);
+Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
 Camera* camera = new Camera();
 
@@ -181,6 +186,14 @@ void keyboardInput(unsigned char key, int x, int y)
 		radAngle = (PI / 180) * camAngle;
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
+		break;
+	case 'a':
+		//move player left
+		player->move(-player_speed);
+		break;
+	case 'd':
+		//move player right
+		player->move(player_speed);
 		break;
 	}
 }
