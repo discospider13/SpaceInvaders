@@ -15,6 +15,7 @@
 #include "Sphere.h"
 #include "SceneParser.h"
 #include "Camera.h"
+#include "Plane.h"
 
 using namespace std;
 
@@ -52,6 +53,7 @@ GLUI_EditText* filenameTextField = NULL;
 
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
+Plane* plane = new Plane(5.0, 1.0, 5.0);
 Cylinder* cylinder = new Cylinder();
 Cone* cone = new Cone();
 Sphere* sphere = new Sphere();
@@ -280,6 +282,8 @@ void myGlutDisplay(void)
 		preOrderWire(root);
 	}
 
+	plane->draw();
+
 	glDisable(GL_COLOR_MATERIAL);
 	int numLights = parser->getNumLights();
 	for (int i = 0; i < numLights; i++) {
@@ -374,6 +378,7 @@ void preOrderFill(SceneNode* node)
 void onExit()
 {
 	delete cube;
+	delete plane;
 	delete cylinder;
 	delete cone;
 	delete sphere;

@@ -24,13 +24,14 @@ enum LightType {
 //! Enumeration for types of primitives that can be stored in a scene file.
 enum PrimitiveType {
 	SHAPE_CUBE = 0,
-	SHAPE_CYLINDER = 1,
-	SHAPE_CONE = 2,
-	SHAPE_SPHERE = 3,
-	SHAPE_SPECIAL1 = 4,
-	SHAPE_SPECIAL2 = 5,
-	SHAPE_SPECIAL3 = 6,
-	SHAPE_MESH = 7
+	SHAPE_PLANE = 1,
+	SHAPE_CYLINDER = 2,
+	SHAPE_CONE = 3,
+	SHAPE_SPHERE = 4,
+	SHAPE_SPECIAL1 = 5,
+	SHAPE_SPECIAL2 = 6,
+	SHAPE_SPECIAL3 = 7,
+	SHAPE_MESH = 8
 };
 
 
