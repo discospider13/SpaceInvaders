@@ -1,6 +1,6 @@
 #define NUM_OPENGL_LIGHTS 8
 
-//Author: Matt Engman
+//Author: Matt Engman, Logan Parmeter
 
 //#include <string.h>
 #include <iostream>
