@@ -28,6 +28,8 @@ int	 camRotU = 0;
 int	 camRotV = 0;
 int	 camRotW = 0;
 int  viewAngle = 45;
+int	 camAngle = 0;
+float radAngle = 0.0;
 float eyeX = 2;
 float eyeY = 2;
 float eyeZ = 2;
@@ -37,7 +39,14 @@ float lookZ = -2;
 
 /** These are GLUI control panel objects ***/
 int  main_window;
-string filenamePath = "data\\general\\matt.xml";
+string filenamePath = "data\\general\\ball.xml";
+string gameText1 = "Welcome to Space Invaders!";
+string gameText2 = "Controls:";
+string gameText3 = "Use 'a' and 'd' to move left and right";
+string gameText4 = "Use space to fire your laser";
+string gameText5 = "Use 'q' and 'e' to rotate the camera";
+string gameText6 = "Thanks for playing!";
+string gameTextSpace = " ";
 GLUI_EditText* filenameTextField = NULL;
 
 
@@ -55,12 +64,6 @@ void preOrderFill(SceneNode* node);
 void preOrderWire(SceneNode* node);
 
 void callback_load(int id) {
-	char curDirName[2048];
-	if (filenameTextField == NULL) {
-		return;
-	}
-	printf("%s\n", filenameTextField->get_text());
-
 	if (parser != NULL) {
 		delete parser;
 	}
@@ -126,17 +129,9 @@ void myGlutReshape(int x, int y)
 /***************************************** setupCamera() *****************/
 void setupCamera()
 {
-	SceneCameraData cameraData;
-	parser->getCameraData(cameraData);
-
 	camera->Reset();  //note that this is a new function. Be sure to set values for near and far plane!
-	camera->SetViewAngle(cameraData.heightAngle);
-	if (cameraData.isDir == true) {
-		camera->Orient(cameraData.pos, cameraData.look, cameraData.up);
-	}
-	else {
-		camera->Orient(cameraData.pos, cameraData.lookAt, cameraData.up);
-	}
+	camera->SetViewAngle(50);
+	camera->Orient(Point(0, 5, 5), Point(0, 0, 0), Vector(0, 1, 0));
 
 	viewAngle = camera->GetViewAngle();
 	Point eyeP = camera->GetEyePoint();
@@ -388,6 +383,27 @@ void onExit()
 	}
 }
 
+void keyboardInput(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case 'q': 
+		camAngle++;
+		radAngle = (PI / 180) * camAngle;
+		eyeZ = cos(radAngle) * 5;
+		eyeX = sin(radAngle) * 5;
+		camera->Orient(Point(eyeX, eyeY, eyeZ), Point(0, 0, 0), Vector(0, 1, 0));
+		break;
+	case 'e':
+		camAngle--;
+		radAngle = (PI / 180) * camAngle;
+		eyeZ = cos(radAngle) * 5;
+		eyeX = sin(radAngle) * 5;
+		camera->Orient(Point(eyeX, eyeY, eyeZ), Point(0, 0, 0), Vector(0, 1, 0));
+		break;
+	}
+}
+
 /**************************************** main() ********************/
 
 int main(int argc, char* argv[])
@@ -401,11 +417,12 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(50, 50);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(750, 750);
 
-	main_window = glutCreateWindow("CSI 4341: Assignment 3");
+	main_window = glutCreateWindow("Space Invaders!");
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
+	glutKeyboardFunc(keyboardInput);
 
 	glShadeModel(GL_SMOOTH);
 
@@ -430,46 +447,17 @@ int main(int argc, char* argv[])
 
 	GLUI* glui = GLUI_Master.create_glui("GLUI");
 
-	filenameTextField = new GLUI_EditText(glui, "Filename:", filenamePath);
-	filenameTextField->set_w(300);
-	glui->add_button("Load", 0, callback_load);
+	glui->add_statictext(gameText1);
+	glui->add_statictext(gameTextSpace);
+	glui->add_statictext(gameText2);
+	glui->add_statictext(gameText3);
+	glui->add_statictext(gameText4);
+	glui->add_statictext(gameText5);
+	glui->add_statictext(gameTextSpace);
+	glui->add_statictext(gameText6);
+	glui->add_statictext(gameTextSpace);
 
-	GLUI_Panel *camera_panel = glui->add_panel("Camera");
-	(new GLUI_Spinner(camera_panel, "RotateV:", &camRotV))
-		->set_int_limits(-179, 179);
-	(new GLUI_Spinner(camera_panel, "RotateU:", &camRotU))
-		->set_int_limits(-179, 179);
-	(new GLUI_Spinner(camera_panel, "RotateW:", &camRotW))
-		->set_int_limits(-179, 179);
-	(new GLUI_Spinner(camera_panel, "Angle:", &viewAngle))
-		->set_int_limits(1, 179);
-
-	glui->add_column_to_panel(camera_panel, true);
-
-	GLUI_Spinner* eyex_widget = glui->add_spinner_to_panel(camera_panel, "EyeX:", GLUI_SPINNER_FLOAT, &eyeX);
-	eyex_widget->set_float_limits(-10, 10);
-	GLUI_Spinner* eyey_widget = glui->add_spinner_to_panel(camera_panel, "EyeY:", GLUI_SPINNER_FLOAT, &eyeY);
-	eyey_widget->set_float_limits(-10, 10);
-	GLUI_Spinner* eyez_widget = glui->add_spinner_to_panel(camera_panel, "EyeZ:", GLUI_SPINNER_FLOAT, &eyeZ);
-	eyez_widget->set_float_limits(-10, 10);
-
-	GLUI_Spinner* lookx_widget = glui->add_spinner_to_panel(camera_panel, "LookX:", GLUI_SPINNER_FLOAT, &lookX);
-	lookx_widget->set_float_limits(-10, 10);
-	GLUI_Spinner* looky_widget = glui->add_spinner_to_panel(camera_panel, "LookY:", GLUI_SPINNER_FLOAT, &lookY);
-	looky_widget->set_float_limits(-10, 10);
-	GLUI_Spinner* lookz_widget = glui->add_spinner_to_panel(camera_panel, "LookZ:", GLUI_SPINNER_FLOAT, &lookZ);
-	lookz_widget->set_float_limits(-10, 10);
-
-	glui->add_column(true);
-
-	GLUI_Panel *render_panel = glui->add_panel("Render");
-	new GLUI_Checkbox(render_panel, "Wireframe", &wireframe);
-	new GLUI_Checkbox(render_panel, "Fill", &fillObj);
-	(new GLUI_Spinner(render_panel, "Segments X:", &segmentsX))
-		->set_int_limits(3, 60);
-	(new GLUI_Spinner(render_panel, "Segments Y:", &segmentsY))
-		->set_int_limits(3, 60);
-
+	glui->add_button("Start", 0, callback_load);
 
 	glui->add_button("Quit", 0, (GLUI_Update_CB)exit);
 
