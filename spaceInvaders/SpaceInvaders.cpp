@@ -12,6 +12,7 @@
 #include "Cube.h"
 #include "Camera.h"
 #include "Plane.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -31,7 +32,6 @@ float eyeZ = 2;
 float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
-//float pspd = 0.25;
 
 /** These are GLUI control panel objects ***/
 int  main_window;
@@ -47,6 +47,7 @@ string gameTextSpace = " ";
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
 Plane* plane = new Plane(10.0, 0.1, 10.0);
+Player* player = new Player(0.0, 0.0, 0.0);
 Shape* shape = NULL;
 Camera* camera = new Camera();
 
@@ -144,6 +145,13 @@ void myGlutDisplay(void)
 	glDisable(GL_COLOR_MATERIAL);
 
 	plane->draw();
+	player->draw();
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//plane->draw();
+	glDisable(GL_LIGHTING);
 
 	camera->RotateV(-camRotV);
 	camera->RotateU(-camRotU);
@@ -174,14 +182,6 @@ void keyboardInput(unsigned char key, int x, int y)
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
 		break;
-	/*
-	case 'a':
-		player->setLocX(player->getLocX() - pspd);
-		break;
-	case 'd':
-		player->setLocX(player->getLocX() - pspd);
-		break;
-	*/
 	}
 }
 
