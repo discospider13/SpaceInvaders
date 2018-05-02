@@ -2,22 +2,24 @@
 #define PLANE_H
 
 #include "Algebra.h"
-#include "Cube.h"
 
 class Plane {
-public:
+private:
 	float x, y, z;
 
+public:
 	Plane(float x, float y, float z) {
-		x = x;
-		y = y;
-		z = z;
+		this->x = x;
+		this->y = y;
+		this->z = z;
 	}
 
 	void draw() {
 		glPushMatrix();
-		glScalef(x, y, z);
-		glutSolidCube(10.0);
+			glTranslatef(0.0, 0.0, 0.0);
+			glScalef(this->x, this->y, this->z);
+			glColor3f(0.0f, 1.0f, 1.0f);
+			glutSolidCube(1.0);
 		glPopMatrix();
 	}
 };
