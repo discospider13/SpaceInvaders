@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algebra.h" />
+    <ClInclude Include="Alien.h" />
+    <ClInclude Include="AlienOne.h" />
+    <ClInclude Include="AlienTwo.h" />
+    <ClInclude Include="AlienZero.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Laser.h" />
