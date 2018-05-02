@@ -31,6 +31,7 @@ float eyeZ = 2;
 float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
+//float pspd = 0.25;
 
 /** These are GLUI control panel objects ***/
 int  main_window;
@@ -144,15 +145,6 @@ void myGlutDisplay(void)
 
 	plane->draw();
 
-	glEnable(GL_LIGHTING);
-	glEnable(GL_POLYGON_OFFSET_FILL);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//shape = cube;
-	//shape->setSegments(1, 1);
-	//shape->draw();
-	
-	glDisable(GL_LIGHTING);
-
 	camera->RotateV(-camRotV);
 	camera->RotateU(-camRotU);
 	camera->RotateW(-camRotW);
@@ -182,6 +174,14 @@ void keyboardInput(unsigned char key, int x, int y)
 		eyeZ = cos(radAngle) * 5;
 		eyeX = sin(radAngle) * 5;
 		break;
+	/*
+	case 'a':
+		player->setLocX(player->getLocX() - pspd);
+		break;
+	case 'd':
+		player->setLocX(player->getLocX() - pspd);
+		break;
+	*/
 	}
 }
 
