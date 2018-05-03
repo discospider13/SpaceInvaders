@@ -21,6 +21,7 @@
 #include "AlienZero.h"
 #include "AlienOne.h"
 #include "AlienTwo.h"
+#include "Barrier.h"
 
 using namespace std;
 
@@ -63,6 +64,7 @@ Cube* cube = new Cube();
 LaserControl lasers;
 AlienControl aliens;
 GameControl control;
+Barrier* barrier = new Barrier(1, 1, 1, 5);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -150,6 +152,7 @@ void myGlutDisplay(void)
 
 	Matrix compositeMatrix;
 
+	//barrier->draw();
 	aliens.collide(lasers.laserList);
 	player->draw();
 	player->decFire();

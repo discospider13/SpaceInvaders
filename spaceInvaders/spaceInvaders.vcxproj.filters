@@ -60,6 +60,9 @@
     <ClInclude Include="GameControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Barrier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SpaceInvaders.cpp">
