@@ -28,6 +28,7 @@
     <ClInclude Include="AlienZero.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="GameControl.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LaserControl.h" />
     <ClInclude Include="Plane.h" />

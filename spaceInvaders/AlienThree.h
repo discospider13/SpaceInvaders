@@ -12,6 +12,7 @@ public:
 		this->loc_z = 0;
 		this->state = 0;
 		this->count = 14;
+		this->boss = true;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 0.0;
@@ -23,6 +24,7 @@ public:
 		this->loc_z = z;
 		this->state = 0;
 		this->count = 14;
+		this->boss = true;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 0.0;

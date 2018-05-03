@@ -12,6 +12,7 @@ public:
 		this->loc_z = 0;
 		this->state = 0;
 		this->count = 14;
+		this->boss = false;
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 1.0;
@@ -23,6 +24,7 @@ public:
 		this->loc_z = z;
 		this->state = 0;
 		this->count = 14;
+		this->boss = false;
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 1.0;
@@ -33,7 +35,7 @@ public:
 		//state == 1 : legs open
 			glPushMatrix();
 			glTranslatef(this->loc_x, this->loc_y, this->loc_z);
-			glScalef(0.2f, 0.2f, 0.2f);
+			glScalef(0.1f, 0.1f, 0.1f);
 			glColor3f(this->r, this->g, this->b);
 
 			//longest segment

@@ -1,6 +1,7 @@
 #ifndef ALIENCONTROL_H
 #define ALIENCONTROL_H
 #include <vector>
+#include <iostream>
 #include "Alien.h"
 #include "AlienZero.h"
 #include "AlienOne.h"
@@ -50,12 +51,16 @@ public:
 	{
 		for (int i = 0; i < aliens.size(); i++)
 		{
-			aliens.at(i)->draw();
+			if (aliens.at(i)->toDraw)
+			{
+				aliens.at(i)->draw();
+			}
 		}
 	}
 	
 	void collide(vector<Laser>& lasers)
 	{
+		bool exit = false;
 		it = aliens.begin();
 		lit = lasers.begin();
 		for (int i = 0; i < aliens.size(); i++, it++)
@@ -66,10 +71,23 @@ public:
 				{
 					if (lasers.at(j).locZ + 0.15 > aliens.at(i)->loc_z && lasers.at(j).locZ - 0.15 < aliens.at(i)->loc_z)
 					{
-						if (lasers.at(j).locX > aliens.at(i)->loc_x - 1 && lasers.at(j).locX < aliens.at(i)->loc_x + 1)
+						if (aliens.at(i)->boss)
 						{
-							it = aliens.erase(it);
-							lit = lasers.erase(lit);
+							if (lasers.at(j).locX > aliens.at(i)->loc_x - 1.5 && lasers.at(j).locX < aliens.at(i)->loc_x + 1.5)
+							{
+								aliens.at(i)->toDraw = false;
+								lasers.at(j).toDraw = false;
+								return;
+							}
+						}
+						else
+						{
+							if (lasers.at(j).locX > aliens.at(i)->loc_x - 0.75 && lasers.at(j).locX < aliens.at(i)->loc_x + 0.75)
+							{
+								aliens.at(i)->toDraw = false;
+								lasers.at(j).toDraw = false;
+								return;
+							}
 						}
 					}
 				}

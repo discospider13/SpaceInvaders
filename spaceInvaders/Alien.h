@@ -9,6 +9,8 @@ public:
 	float loc_x, loc_y, loc_z;
 	int state;
 	int count;
+	bool boss;
+	bool toDraw = true;
 	Alien() {}
 	~Alien() {}
 	virtual void draw() {}
