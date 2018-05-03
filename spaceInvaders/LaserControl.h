@@ -33,11 +33,11 @@ public:
 				laserList.at(i).locZ -= spd;
 			}
 
-			if (laserList.at(i).dir && laserList.at(i).locZ > 2)
+			if (laserList.at(i).dir && laserList.at(i).locZ > 5)
 			{
 				it = laserList.erase(it);
 			}
-			else if(!laserList.at(i).dir && laserList.at(i).locZ < -2)
+			else if(!laserList.at(i).dir && laserList.at(i).locZ < -5)
 			{
 				it = laserList.erase(it);
 			}

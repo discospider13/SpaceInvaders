@@ -32,7 +32,7 @@ public:
 		//state == 0 : legs curled in
 		//state == 1 : legs open
 			glPushMatrix();
-			glTranslatef(this->loc_x, this->loc_y, this->loc_x);
+			glTranslatef(this->loc_x, this->loc_y, this->loc_z);
 			glScalef(0.2f, 0.2f, 0.2f);
 			glColor3f(this->r, this->g, this->b);
 

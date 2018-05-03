@@ -40,7 +40,10 @@ public:
 
 	void decFire()
 	{
-		canFire--;
+		if (canFire > 0)
+		{
+			canFire--;
+		}
 	}
 
 	void draw() {

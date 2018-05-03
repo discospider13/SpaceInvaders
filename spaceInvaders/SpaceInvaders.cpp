@@ -70,7 +70,7 @@ void setupCamera();
 void callback_start(int id) {
 	numLevels = setLevels;
 	aliens.spawn(0, 1, -2, 0);
-	aliens.spawn(0, 1, -3, 1);
+	aliens.spawn(0, 1, -4, 1);
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -161,11 +161,12 @@ void myGlutDisplay(void)
 	glDisable(GL_COLOR_MATERIAL);
 
 	player->draw();
+	player->decFire();
 	aliens.nextState();
 	aliens.draw();
 	lasers.move();
+	aliens.collide(lasers.laserList);
 	lasers.draw();
-	
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -245,10 +246,6 @@ void keyboardInput(unsigned char key, int x, int y)
 		{
 			lasers.create(player->getLocX(), player->getLocY(), player->getLocZ(), false);
 			player->resetFire();
-		}
-		else
-		{
-			player->decFire();
 		}
 		break;
 	}

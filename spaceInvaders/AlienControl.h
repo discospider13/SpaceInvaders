@@ -9,6 +9,8 @@ class AlienControl
 {
 public:
 	vector<Alien*> aliens;
+	vector<Alien*>::iterator it;
+	vector<Laser>::iterator lit;
 
 	void spawn(float x, float y, float z, int id)
 	{
@@ -41,6 +43,27 @@ public:
 			aliens.at(i)->draw();
 		}
 	}
+	
+	void collide(vector<Laser>& lasers)
+	{
+		it = aliens.begin();
+		lit = lasers.begin();
+		for (int i = 0; i < aliens.size(); i++, it++)
+		{
+			for (int j = 0; j < lasers.size(); j++, lit++)
+			{
+				if (lasers.at(j).locY == aliens.at(i)->loc_y)
+				{
+					if (lasers.at(j).locZ + 0.15 > aliens.at(i)->loc_z && lasers.at(j).locZ - 0.15 < aliens.at(i)->loc_z)
+					{
+						it = aliens.erase(it);
+						lit = lasers.erase(lit);
+					}
+				}
+			}
+		}
+	}
+	
 };
 
 

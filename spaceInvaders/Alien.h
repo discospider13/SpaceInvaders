@@ -4,13 +4,11 @@
 #include "Shape.h"
 
 class Alien : public Shape {
-protected:
+public:
 	float r, g, b;
 	float loc_x, loc_y, loc_z;
 	int state;
 	int count;
-
-public:
 	Alien() {}
 	~Alien() {}
 	virtual void draw() {}
