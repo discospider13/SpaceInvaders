@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "Plane.h"
 #include "Player.h"
+#include "GameControl.h"
 #include "LaserControl.h"
 #include "AlienControl.h"
 #include "Alien.h"
@@ -40,9 +41,9 @@ float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
 
-float player_speed = 0.05;
+float player_speed = 0.075;
 float player_x = 0.0;
-float player_y = 0.0;
+float player_y = -1.0;
 float player_z = 0.0;
 
 /** These are GLUI control panel objects ***/
@@ -54,7 +55,6 @@ string gameText4 = "Use space to fire your laser";
 string gameText5 = "Use 'q' and 'e' to rotate the camera";
 string gameText6 = "Thanks for playing!";
 string gameTextSpace = " ";
-int numLevels = 0;
 int curLevel = 1;
 int setLevels = 0;
 
@@ -62,6 +62,7 @@ int setLevels = 0;
 Cube* cube = new Cube();
 LaserControl lasers;
 AlienControl aliens;
+GameControl control;
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -70,11 +71,10 @@ Camera* camera = new Camera();
 void setupCamera();
 
 void callback_start(int id) {
-	numLevels = setLevels;
-	aliens.spawn(0, 1, -2, 0);
-	aliens.spawn(0, 1, -4, 1);
-	aliens.spawn(-2, 1, -2, 2);
-	aliens.spawn(3, 1, -5, 3);
+	control.diff = setLevels;
+	aliens.spawn(0, -1, -2, 0);
+	aliens.spawn(0, 0, -2, 1);
+	aliens.spawn(0, 1, -2, 2);
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -111,7 +111,7 @@ void setupCamera()
 {
 	camera->Reset();  //note that this is a new function. Be sure to set values for near and far plane!
 	camera->SetViewAngle(50);
-	camera->Orient(Point(0, 5, 5), Point(0, 0, 0), Vector(0, 1, 0));
+	camera->Orient(Point(0, 2, 5), Point(0, 0, 0), Vector(0, 1, 0));
 
 	viewAngle = camera->GetViewAngle();
 	Point eyeP = camera->GetEyePoint();
@@ -150,13 +150,14 @@ void myGlutDisplay(void)
 
 	Matrix compositeMatrix;
 
+	aliens.collide(lasers.laserList);
 	player->draw();
 	player->decFire();
 	aliens.nextState();
 	aliens.draw();
 	lasers.move();
-	aliens.collide(lasers.laserList);
 	lasers.draw();
+	lasers.check();
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -212,7 +213,7 @@ void keyboardInput(unsigned char key, int x, int y)
 		break;
 	case 'w':
 		//move player up level
-		if (curLevel < numLevels)
+		if (curLevel < control.diff)
 		{
 			curLevel++;
 			float temp = player->getLocY();

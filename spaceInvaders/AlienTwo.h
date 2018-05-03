@@ -12,6 +12,7 @@ public:
 		this->loc_z = 0;
 		this->state = 0;
 		this->count = 14;
+		this->boss = false;
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 0.0;
@@ -23,6 +24,7 @@ public:
 		this->loc_z = z;
 		this->state = 0;
 		this->count = 14;
+		this->boss = false;
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 0.0;
@@ -34,7 +36,7 @@ public:
 
 		glPushMatrix();
 		glTranslatef(this->loc_x, this->loc_y, this->loc_z);
-		glScalef(0.2, 0.2, 0.2);
+		glScalef(0.1, 0.1, 0.1);
 		glColor3f(this->r, this->g, this->b);
 
 		//largest segment

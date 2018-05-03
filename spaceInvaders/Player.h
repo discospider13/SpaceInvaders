@@ -63,7 +63,7 @@ public:
 		//draw nose
 		glPushMatrix();
 		glTranslatef(this->loc_x, this->loc_y, this->loc_z);
-		glScalef(0.2, 0.2, 0.2);
+		glScalef(0.1, 0.1, 0.1);
 		glColor3f(this->r, this->g, this->b);
 		glutSolidCube(1.0);
 

@@ -19,6 +19,22 @@ public:
 		laserList.push_back(temp);
 	}
 
+	void check()
+	{
+		int check = 0;
+		for (int i = 0; i < laserList.size(); i++)
+		{
+			if (!laserList.at(i).toDraw)
+			{
+				check++;
+			}
+		}
+		if (check >= laserList.size())
+		{
+			laserList.clear();
+		}
+	}
+
 	void move()
 	{
 		it = laserList.begin();
@@ -48,10 +64,13 @@ public:
 	{
 		for (int i = 0; i < laserList.size(); i++)
 		{
-			glPushMatrix();
-			glTranslatef(laserList.at(i).locX, laserList.at(i).locY, laserList.at(i).locZ);
-			laserList.at(i).draw();
-			glPopMatrix();
+			if (laserList.at(i).toDraw)
+			{
+				glPushMatrix();
+				glTranslatef(laserList.at(i).locX, laserList.at(i).locY, laserList.at(i).locZ);
+				laserList.at(i).draw();
+				glPopMatrix();
+			}
 		}
 	}
 };
