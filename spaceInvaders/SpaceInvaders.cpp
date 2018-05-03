@@ -16,6 +16,7 @@
 #include "LaserControl.h"
 #include "Alien.h"
 #include "AlienZero.h"
+#include "AlienOne.h"
 
 using namespace std;
 
@@ -57,7 +58,7 @@ int setLevels = 0;
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
 LaserControl lasers;
-Alien* alien = new AlienZero(0, 2, -2);
+Alien* alien = new AlienOne(0, 1, -1);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
