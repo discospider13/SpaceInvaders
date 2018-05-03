@@ -15,6 +15,7 @@ private:
 	float loc_x, loc_y, loc_z;
 	float r, g, b;
 	float speed;
+	int canFire = 0;
 
 public:
 	Player(float x, float y, float z, float speed) {
@@ -25,6 +26,21 @@ public:
 		this->g = 1.0;
 		this->b = 0.0;
 		this->speed = speed;
+	}
+
+	int getNumFire()
+	{
+		return canFire;
+	}
+
+	void resetFire()
+	{
+		canFire = 14;
+	}
+
+	void decFire()
+	{
+		canFire--;
 	}
 
 	void draw() {

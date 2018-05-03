@@ -48,7 +48,9 @@ string gameText4 = "Use space to fire your laser";
 string gameText5 = "Use 'q' and 'e' to rotate the camera";
 string gameText6 = "Thanks for playing!";
 string gameTextSpace = " ";
-
+int numLevels = 0;
+int curLevel = 1;
+int setLevels = 0;
 
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
@@ -61,7 +63,7 @@ Camera* camera = new Camera();
 void setupCamera();
 
 void callback_start(int id) {
-	
+	numLevels = setLevels;
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -209,16 +211,36 @@ void keyboardInput(unsigned char key, int x, int y)
 		player->move(player_speed, 0);
 		break;
 	case 'w':
-		//move player up
-		player->move(player_speed, 2);
+		//move player up level
+		if (curLevel < numLevels)
+		{
+			curLevel++;
+			float temp = player->getLocY();
+			temp += 1.0;
+			player->setLocY(temp);
+		}
 		break;
 	case 's':
-		//move player down
-		player->move(player_speed, 3);
+		//move player down level
+		if (curLevel > 1)
+		{
+			curLevel--;
+			float temp = player->getLocY();
+			temp -= 1.0;
+			player->setLocY(temp);
+		}
 		break;
 	case 32:
 		//fire laser
-		lasers.create(player->getLocX(), player->getLocY(), player->getLocZ(), false);
+		if (player->getNumFire() == 0)
+		{
+			lasers.create(player->getLocX(), player->getLocY(), player->getLocZ(), false);
+			player->resetFire();
+		}
+		else
+		{
+			player->decFire();
+		}
 		break;
 	}
 }
@@ -290,6 +312,14 @@ int main(int argc, char* argv[])
 	glui->add_statictext(gameText5);
 	glui->add_statictext(gameTextSpace);
 	glui->add_statictext(gameText6);
+	glui->add_statictext(gameTextSpace);
+
+	GLUI_Listbox *listbox = glui->add_listbox("Set difficulty", &setLevels);
+	listbox->add_item(1, "Easy");
+	listbox->add_item(2, "Medium");
+	listbox->add_item(3, "Hard");
+
+	glui->add_statictext(gameTextSpace);
 	glui->add_statictext(gameTextSpace);
 
 	glui->add_button("Start", 0, callback_start);
