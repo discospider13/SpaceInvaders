@@ -72,8 +72,8 @@ void callback_start(int id) {
 	numLevels = setLevels;
 	aliens.spawn(0, 1, -2, 0);
 	aliens.spawn(0, 1, -4, 1);
-	aliens.spawn(2, 1, -2, 2);
-	aliens.spawn(2, 1, -2, 3);
+	aliens.spawn(-2, 1, -2, 2);
+	aliens.spawn(3, 1, -5, 3);
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -148,20 +148,6 @@ void myGlutDisplay(void)
 	glLoadMatrixd(camera->GetModelViewMatrix().unpack());
 
 	Matrix compositeMatrix;
-
-	//drawing the axes
-	glEnable(GL_COLOR_MATERIAL);
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINES);
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0, 0, 0); glVertex3f(1.0, 0, 0);
-	glColor3f(0.0, 1.0, 0.0);
-	glVertex3f(0, 0, 0); glVertex3f(0.0, 1.0, 0);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex3f(0, 0, 0); glVertex3f(0, 0, 1.0);
-	glEnd();
-	glColor3f(1.0, 0.0, 0.0);
-	glDisable(GL_COLOR_MATERIAL);
 
 	player->draw();
 	player->decFire();

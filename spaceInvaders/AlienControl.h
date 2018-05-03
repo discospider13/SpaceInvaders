@@ -66,8 +66,11 @@ public:
 				{
 					if (lasers.at(j).locZ + 0.15 > aliens.at(i)->loc_z && lasers.at(j).locZ - 0.15 < aliens.at(i)->loc_z)
 					{
-						it = aliens.erase(it);
-						lit = lasers.erase(lit);
+						if (lasers.at(j).locX > aliens.at(i)->loc_x - 1 && lasers.at(j).locX < aliens.at(i)->loc_x + 1)
+						{
+							it = aliens.erase(it);
+							lit = lasers.erase(lit);
+						}
 					}
 				}
 			}
