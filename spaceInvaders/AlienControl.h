@@ -5,6 +5,7 @@
 #include "AlienZero.h"
 #include "AlienOne.h"
 #include "AlienTwo.h"
+#include "AlienThree.h"
 
 class AlienControl
 {
@@ -28,6 +29,10 @@ public:
 			break;
 		case 2:
 			temp = new AlienTwo(x, y, z);
+			aliens.push_back(temp);
+			break;
+		case 3:
+			temp = new AlienThree(x, y, z);
 			aliens.push_back(temp);
 			break;
 		}

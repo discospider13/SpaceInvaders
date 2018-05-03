@@ -73,6 +73,7 @@ void callback_start(int id) {
 	aliens.spawn(0, 1, -2, 0);
 	aliens.spawn(0, 1, -4, 1);
 	aliens.spawn(2, 1, -2, 2);
+	aliens.spawn(2, 1, -2, 3);
 }
 
 /***************************************** myGlutIdle() ***********/

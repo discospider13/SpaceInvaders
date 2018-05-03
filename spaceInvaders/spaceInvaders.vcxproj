@@ -23,6 +23,7 @@
     <ClInclude Include="Alien.h" />
     <ClInclude Include="AlienControl.h" />
     <ClInclude Include="AlienOne.h" />
+    <ClInclude Include="AlienThree.h" />
     <ClInclude Include="AlienTwo.h" />
     <ClInclude Include="AlienZero.h" />
     <ClInclude Include="Camera.h" />
