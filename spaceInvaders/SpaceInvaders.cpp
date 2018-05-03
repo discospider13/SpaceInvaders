@@ -14,6 +14,7 @@
 #include "Plane.h"
 #include "Player.h"
 #include "LaserControl.h"
+#include "AlienControl.h"
 #include "Alien.h"
 #include "AlienZero.h"
 #include "AlienOne.h"
@@ -58,7 +59,7 @@ int setLevels = 0;
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
 LaserControl lasers;
-Alien* alien = new AlienOne(0, 1, -1);
+AlienControl aliens;
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -68,6 +69,8 @@ void setupCamera();
 
 void callback_start(int id) {
 	numLevels = setLevels;
+	aliens.spawn(0, 1, -2, 0);
+	aliens.spawn(0, 1, -3, 1);
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -157,11 +160,12 @@ void myGlutDisplay(void)
 	glColor3f(1.0, 0.0, 0.0);
 	glDisable(GL_COLOR_MATERIAL);
 
-	//plane->draw();
 	player->draw();
-	alien->draw();
+	aliens.nextState();
+	aliens.draw();
 	lasers.move();
 	lasers.draw();
+	
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);

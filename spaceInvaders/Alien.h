@@ -8,12 +8,14 @@ protected:
 	float r, g, b;
 	float loc_x, loc_y, loc_z;
 	int state;
+	int count;
 
 public:
 	Alien() {}
 	~Alien() {}
-	void draw() {}
-	void drawNormal() {}
+	virtual void draw() {}
+	virtual void drawNormal() {}
+	virtual void nextState() {}
 };
 
 #endif

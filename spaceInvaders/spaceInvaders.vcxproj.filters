@@ -51,6 +51,9 @@
     <ClInclude Include="AlienTwo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AlienControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SpaceInvaders.cpp">

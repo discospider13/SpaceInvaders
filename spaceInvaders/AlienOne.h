@@ -10,6 +10,7 @@ public:
 		this->loc_y = 0;
 		this->loc_z = 0;
 		this->state = 0;
+		this->count = 14;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 1.0;
@@ -20,6 +21,7 @@ public:
 		this->loc_y = y;
 		this->loc_z = z;
 		this->state = 0;
+		this->count = 14;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 1.0;
@@ -170,11 +172,26 @@ public:
 
 		glPopMatrix();
 
-		if (this->state == 0)
-			this->state == 1;
-		else
-			this->state == 0;
+	}
 
+	void nextState()
+	{
+		if (count == 0)
+		{
+			if (state == 0)
+			{
+				state = 1;
+			}
+			else
+			{
+				state = 0;
+			}
+			count = 14;
+		}
+		else
+		{
+			count--;
+		}
 	}
 
 	void drawNormal() {
