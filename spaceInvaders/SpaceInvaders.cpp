@@ -6,7 +6,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <GL/glui.h>
+#include <gl/glew.h>
+#include <GL/glew.h>
 #include <freeglut.h>
 #include "Shape.h"
 #include "Cube.h"
