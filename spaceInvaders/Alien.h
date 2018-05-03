@@ -7,6 +7,7 @@ class Alien : public Shape {
 protected:
 	float r, g, b;
 	float loc_x, loc_y, loc_z;
+	int state;
 
 public:
 	Alien() {}

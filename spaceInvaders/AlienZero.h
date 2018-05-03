@@ -2,6 +2,7 @@
 #define ALIENZERO_H
 
 #include "Alien.h"
+#include "Shape.h"
 
 class AlienZero : public Alien {
 public:
@@ -9,16 +10,215 @@ public:
 		this->loc_x = 0;
 		this->loc_y = 0;
 		this->loc_z = 0;
+		this->state = 0;
+		this->r = 0.0;
+		this->g = 1.0;
+		this->b = 1.0;
 	}
 
 	AlienZero(float x, float y, float z) {
 		this->loc_x = x;
 		this->loc_y = y;
 		this->loc_z = z;
+		this->state = 0;
+		this->r = 0.0;
+		this->g = 1.0;
+		this->b = 1.0;
 	}
 
 	void draw() {
+		//state == 0 : legs curled in
+		//state == 1 : legs open
+			glPushMatrix();
+			glTranslatef(this->loc_x, this->loc_y, this->loc_x);
+			glScalef(0.2f, 0.2f, 0.2f);
+			glColor3f(this->r, this->g, this->b);
 
+			//longest segment
+			glPushMatrix();
+			glTranslatef(-5.0, 0.0, 0.0);
+			for (int i = 0; i < 11; i++) {
+				glPushMatrix();
+				glTranslatef(1.0 * i, 0.0, 0.0);
+				glutSolidCube(1.0);
+				glPopMatrix();
+			}
+			glPopMatrix();
+
+			//eye level
+			glPushMatrix();
+			glTranslatef(-4.0, 1.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 9; i++) {
+					if (i != 2 && i != 6) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			else if (this->state == 1) {
+				glTranslatef(-1.0, 0.0, 0.0);
+				for (int i = 0; i < 11; i++) {
+					if (i != 3 && i != 7) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			glPopMatrix();
+
+			//1 above eyes
+			glPushMatrix();
+			glTranslatef(-3.0, 2.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 7; i++) {
+					glPushMatrix();
+					glTranslatef(1.0 * i, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+			}
+			else if (this->state == 1) {
+				glTranslatef(-2.0, 0.0, 0.0);
+				for (int i = 0; i < 11; i++) {
+					if (i != 1 && i != 9) {
+						glPushMatrix();
+						glTranslatef(1.0 * i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			glPopMatrix();
+
+			//lower antennae
+			glPushMatrix();
+			glTranslatef(-2.0, 3.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 5; i++) {
+					if (i == 0 || i == 4) {
+						glPushMatrix();
+						glTranslatef(1.0 * i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			else if (this->state == 1) {
+				glTranslatef(-3.0, 0.0, 0.0);
+				for (int i = 0; i < 11; i++) {
+					if (i == 0 || i == 3 || i == 7 || i == 10) {
+						glPushMatrix();
+						glTranslatef(1.0 * i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+
+			}
+			glPopMatrix();
+
+			//upper antennae
+			glPushMatrix();
+			glTranslatef(-3.0, 4.0, 0.0);
+			for (int i = 0; i < 7; i++) {
+				if (i == 0 || i == 6) {
+					glPushMatrix();
+					glTranslatef(1.0*i, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+			}
+			glPopMatrix();
+
+			//1 below middle
+			glPushMatrix();
+			glTranslatef(-5.0, -1.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 11; i++) {
+					if (i != 1 && i != 9) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			else if (this->state == 1) {
+				glTranslatef(1.0, 0.0, 0.0);
+				for (int i = 0; i < 9; i++) {
+					glPushMatrix();
+					glTranslatef(1.0*i, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+			}
+			glPopMatrix();
+
+			//2 below middle
+			glPushMatrix();
+			glTranslatef(-5.0, -2.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 11; i++) {
+					if (i == 0 || i == 2 || i == 8 || i == 10) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			if (this->state == 1) {
+				glTranslatef(2.0, 0.0, 0.0);
+				for (int i = 0; i < 7; i++) {
+					if (i == 0 || i == 6) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			glPopMatrix();
+
+			//3 below middle
+			glPushMatrix();
+			glTranslatef(-2.0, -3.0, 0.0);
+			if (this->state == 0) {
+				for (int i = 0; i < 5; i++) {
+					if (i != 2) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			else if (this->state == 1) {
+				glTranslatef(-2.0, 0.0, 0.0);
+				for (int i = 0; i < 9; i++) {
+					if (i == 0 || i == 8) {
+						glPushMatrix();
+						glTranslatef(1.0*i, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+			}
+			glPopMatrix();
+			glPopMatrix();
+
+			//switch state
+			if (this->state == 0)
+				this->state == 1;
+			else
+				this->state == 0;
+
+			glutPostRedisplay();
 	}
 
 	void drawNormal() {

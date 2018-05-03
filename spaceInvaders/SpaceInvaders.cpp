@@ -14,6 +14,8 @@
 #include "Plane.h"
 #include "Player.h"
 #include "LaserControl.h"
+#include "Alien.h"
+#include "AlienZero.h"
 
 using namespace std;
 
@@ -53,6 +55,7 @@ string gameTextSpace = " ";
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
 LaserControl lasers;
+Alien* alien = new AlienZero(0, 2, -2);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -153,6 +156,7 @@ void myGlutDisplay(void)
 
 	//plane->draw();
 	player->draw();
+	alien->draw();
 	lasers.move();
 	lasers.draw();
 
