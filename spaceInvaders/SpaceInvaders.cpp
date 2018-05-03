@@ -18,6 +18,7 @@
 #include "Alien.h"
 #include "AlienZero.h"
 #include "AlienOne.h"
+#include "AlienTwo.h"
 
 using namespace std;
 
@@ -71,6 +72,7 @@ void callback_start(int id) {
 	numLevels = setLevels;
 	aliens.spawn(0, 1, -2, 0);
 	aliens.spawn(0, 1, -4, 1);
+	aliens.spawn(2, 1, -2, 2);
 }
 
 /***************************************** myGlutIdle() ***********/
