@@ -2,12 +2,15 @@
 #define ALIENCONTROL_H
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 #include "Alien.h"
 #include "AlienZero.h"
 #include "AlienOne.h"
 #include "AlienTwo.h"
 #include "AlienThree.h"
 #include "laser.h"
+#include "Player.h"
 using namespace std;
 
 class AlienControl
@@ -61,7 +64,7 @@ public:
 		}
 	}
 	
-	void collide(vector<Laser>& lasers)
+	void collide(vector<Laser>& lasers, int& score)
 	{
 		for (int i = 0; i < aliens.size(); i++)
 		{
@@ -75,8 +78,14 @@ public:
 						{
 							if (lasers.at(j).locX > aliens.at(i)->loc_x - 1.5 && lasers.at(j).locX < aliens.at(i)->loc_x + 1.5)
 							{
-								aliens.at(i)->toDraw = false;
+								srand(time(NULL));
+								int r = rand();
+								if ((r % 4) == 0)
+								{
+									aliens.at(i)->toDraw = false;
+								}
 								lasers.at(j).toDraw = false;
+								score += 1000;
 								return;
 							}
 						}
@@ -86,6 +95,7 @@ public:
 							{
 								aliens.at(i)->toDraw = false;
 								lasers.at(j).toDraw = false;
+								score += 50;
 								return;
 							}
 						}
@@ -94,7 +104,16 @@ public:
 			}
 		}
 	}
-	
+
+	void bossMove(Player* player)
+	{
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			aliens.at(i)->loc_y = player->getLocY();
+		}
+		move();
+	}
+
 	void move()
 	{
 		float movedist = dir * 0.05;
