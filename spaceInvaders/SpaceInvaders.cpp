@@ -28,7 +28,7 @@ using namespace std;
 /** These are the live variables passed into GLUI ***/
 int  segmentsX = 1;
 int  segmentsY = 1;
-
+bool inGame = false;
 int	 camRotU = 0;
 int	 camRotV = 0;
 int	 camRotW = 0;
@@ -73,8 +73,10 @@ Camera* camera = new Camera();
 void setupCamera();
 
 void callback_start(int id) {
+	control.setMode(id);
 	control.setDiff(setLevels + 1);
 	control.spawn(aliens);
+	inGame = true;
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -158,9 +160,14 @@ void myGlutDisplay(void)
 	aliens.draw();
 	lasers.move();
 	lasers.draw();
-	if (aliens.empty())
+	if (aliens.empty() && inGame)
 	{
+		aliens.aliens.clear();
 		control.spawn(aliens);
+	}
+	else if (control.getMode() == 1)
+	{
+		aliens.respawn();
 	}
 
 	glEnable(GL_LIGHTING);
@@ -323,7 +330,8 @@ int main(int argc, char* argv[])
 	glui->add_statictext(gameTextSpace);
 	glui->add_statictext(gameTextSpace);
 
-	glui->add_button("Start", 0, callback_start);
+	glui->add_button("Start Classic Mode", 0, callback_start);
+	glui->add_button("Start Endless Mode", 1, callback_start);
 
 	glui->add_button("Quit", 0, (GLUI_Update_CB)exit);
 

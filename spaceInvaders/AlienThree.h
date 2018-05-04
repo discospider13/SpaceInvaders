@@ -13,6 +13,8 @@ public:
 		this->state = 0;
 		this->count = 14;
 		this->boss = true;
+		this->toDraw = true;
+		this->respawn = 10000;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 0.0;
@@ -25,6 +27,8 @@ public:
 		this->state = 0;
 		this->count = 14;
 		this->boss = true;
+		this->toDraw = true;
+		this->respawn = 10000;
 		this->r = 1.0;
 		this->g = 0.0;
 		this->b = 0.0;

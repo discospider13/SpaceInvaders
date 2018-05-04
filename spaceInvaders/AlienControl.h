@@ -16,6 +16,7 @@ public:
 	vector<Alien*> aliens;
 	vector<Alien*>::iterator it;
 	vector<Laser>::iterator lit;
+	int respawnTime = 300;
 
 	void spawn(float x, float y, float z, int id)
 	{
@@ -112,6 +113,26 @@ public:
 			aliens.clear();
 		}
 		return empty;
+	}
+
+	void respawn()
+	{
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			if (!aliens.at(i)->toDraw)
+			{
+				if (aliens.at(i)->respawn == 0)
+				{
+					aliens.at(i)->toDraw = true;
+					aliens.at(i)->respawn = respawnTime;
+					respawnTime -= 3;
+				}
+				else
+				{
+					aliens.at(i)->respawn--;
+				}
+			}
+		}
 	}
 };
 

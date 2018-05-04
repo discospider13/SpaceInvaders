@@ -6,12 +6,14 @@
 #include "AlienOne.h"
 #include "AlienTwo.h"
 #include "AlienThree.h"
+#include <time.h>
+#include <cstdlib>
 
 class GameControl
 {
 private:
 	int diff;
-
+	int gameMode;
 public:
 
 	void setDiff(int diff)
@@ -22,6 +24,16 @@ public:
 	int getDiff()
 	{
 		return diff;
+	}
+
+	void setMode(int mode)
+	{
+		this->gameMode = mode;
+	}
+
+	int getMode()
+	{
+		return gameMode;
 	}
 
 	void spawn(AlienControl& aliens)
