@@ -22,6 +22,7 @@
 #include "AlienOne.h"
 #include "AlienTwo.h"
 #include "Barrier.h"
+#include "Stars.h"
 
 using namespace std;
 
@@ -64,6 +65,7 @@ Cube* cube = new Cube();
 LaserControl lasers;
 AlienControl aliens;
 GameControl control;
+Stars* stars = new Stars(1.0,1.0,1.0, 1000);
 Barrier* barrier = new Barrier(1, 1, 1, 5);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
@@ -136,6 +138,7 @@ void setupCamera()
 
 void myGlutDisplay(void)
 {
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -154,6 +157,7 @@ void myGlutDisplay(void)
 	Matrix compositeMatrix;
 
 	//barrier->draw();
+	stars->draw();
 	if (inGame)
 	{
 		if (player->collide(lasers.laserList))
@@ -322,7 +326,6 @@ int main(int argc, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 
 	glPolygonOffset(1, 1);
-
 
 
 	/****************************************/
