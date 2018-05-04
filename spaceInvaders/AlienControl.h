@@ -7,6 +7,8 @@
 #include "AlienOne.h"
 #include "AlienTwo.h"
 #include "AlienThree.h"
+#include "laser.h"
+using namespace std;
 
 class AlienControl
 {
@@ -67,7 +69,7 @@ public:
 		{
 			for (int j = 0; j < lasers.size(); j++, lit++)
 			{
-				if (lasers.at(j).locY == aliens.at(i)->loc_y)
+				if (lasers.at(j).locY == aliens.at(i)->loc_y && lasers.at(j).toDraw && aliens.at(i)->toDraw)
 				{
 					if (lasers.at(j).locZ + 0.15 > aliens.at(i)->loc_z && lasers.at(j).locZ - 0.15 < aliens.at(i)->loc_z)
 					{
@@ -95,6 +97,22 @@ public:
 		}
 	}
 	
+	bool empty()
+	{
+		bool empty = true;
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			if (aliens.at(i)->toDraw)
+			{
+				empty = false;
+			}
+		}
+		if (empty)
+		{
+			aliens.clear();
+		}
+		return empty;
+	}
 };
 
 

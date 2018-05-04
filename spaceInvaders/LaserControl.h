@@ -19,22 +19,6 @@ public:
 		laserList.push_back(temp);
 	}
 
-	void check()
-	{
-		int check = 0;
-		for (int i = 0; i < laserList.size(); i++)
-		{
-			if (!laserList.at(i).toDraw)
-			{
-				check++;
-			}
-		}
-		if (check >= laserList.size())
-		{
-			laserList.clear();
-		}
-	}
-
 	void move()
 	{
 		it = laserList.begin();
@@ -49,11 +33,11 @@ public:
 				laserList.at(i).locZ -= spd;
 			}
 
-			if (laserList.at(i).dir && laserList.at(i).locZ > 5)
+			if (laserList.at(i).dir && laserList.at(i).locZ > 7)
 			{
 				it = laserList.erase(it);
 			}
-			else if(!laserList.at(i).dir && laserList.at(i).locZ < -5)
+			else if(!laserList.at(i).dir && laserList.at(i).locZ < -7)
 			{
 				it = laserList.erase(it);
 			}
