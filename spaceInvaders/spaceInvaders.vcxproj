@@ -29,16 +29,64 @@
     <ClInclude Include="Barrier.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="freetype\base\basepic.h" />
+    <ClInclude Include="freetype\base\ftbase.h" />
+    <ClInclude Include="freetype\base\md5.h" />
     <ClInclude Include="GameControl.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LaserControl.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="freetype\base\basepic.c" />
+    <ClCompile Include="freetype\base\ftadvanc.c" />
+    <ClCompile Include="freetype\base\ftapi.c" />
+    <ClCompile Include="freetype\base\ftbase.c" />
+    <ClCompile Include="freetype\base\ftbbox.c" />
+    <ClCompile Include="freetype\base\ftbdf.c" />
+    <ClCompile Include="freetype\base\ftbitmap.c" />
+    <ClCompile Include="freetype\base\ftcalc.c" />
+    <ClCompile Include="freetype\base\ftcid.c" />
+    <ClCompile Include="freetype\base\ftdbgmem.c" />
+    <ClCompile Include="freetype\base\ftdebug.c" />
+    <ClCompile Include="freetype\base\ftfntfmt.c" />
+    <ClCompile Include="freetype\base\ftfstype.c" />
+    <ClCompile Include="freetype\base\ftgasp.c" />
+    <ClCompile Include="freetype\base\ftgloadr.c" />
+    <ClCompile Include="freetype\base\ftglyph.c" />
+    <ClCompile Include="freetype\base\ftgxval.c" />
+    <ClCompile Include="freetype\base\fthash.c" />
+    <ClCompile Include="freetype\base\ftinit.c" />
+    <ClCompile Include="freetype\base\ftlcdfil.c" />
+    <ClCompile Include="freetype\base\ftmac.c" />
+    <ClCompile Include="freetype\base\ftmm.c" />
+    <ClCompile Include="freetype\base\ftobjs.c" />
+    <ClCompile Include="freetype\base\ftotval.c" />
+    <ClCompile Include="freetype\base\ftoutln.c" />
+    <ClCompile Include="freetype\base\ftpatent.c" />
+    <ClCompile Include="freetype\base\ftpfr.c" />
+    <ClCompile Include="freetype\base\ftpic.c" />
+    <ClCompile Include="freetype\base\ftpsprop.c" />
+    <ClCompile Include="freetype\base\ftrfork.c" />
+    <ClCompile Include="freetype\base\ftsnames.c" />
+    <ClCompile Include="freetype\base\ftstream.c" />
+    <ClCompile Include="freetype\base\ftstroke.c" />
+    <ClCompile Include="freetype\base\ftsynth.c" />
+    <ClCompile Include="freetype\base\ftsystem.c" />
+    <ClCompile Include="freetype\base\fttrigon.c" />
+    <ClCompile Include="freetype\base\fttype1.c" />
+    <ClCompile Include="freetype\base\ftutil.c" />
+    <ClCompile Include="freetype\base\ftwinfnt.c" />
+    <ClCompile Include="freetype\base\md5.c" />
     <ClCompile Include="SpaceInvaders.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="freetype\base\Jamfile" />
+    <None Include="freetype\base\rules.mk" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5812AADF-93BB-4CB4-8A9F-F52BADC8836E}</ProjectGuid>

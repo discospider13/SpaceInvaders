@@ -6,7 +6,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <gl/glew.h>
 #include <GL/glew.h>
 #include <freeglut.h>
 #include "Shape.h"
@@ -22,6 +21,7 @@
 #include "AlienOne.h"
 #include "AlienTwo.h"
 #include "Barrier.h"
+#include "Stats.h"
 
 using namespace std;
 
@@ -58,6 +58,13 @@ string gameText6 = "Thanks for playing!";
 string gameTextSpace = " ";
 int curLevel = 1;
 int setLevels = 0;
+
+Stats* text_writer = new Stats();
+const char* health_text = new char['H', 'E', 'A', 'L', 'T', 'H'];
+string health = "HEALTH";
+
+
+
 
 /** these are the global variables used for rendering **/
 Cube* cube = new Cube();
@@ -161,6 +168,7 @@ void myGlutDisplay(void)
 	lasers.move();
 	lasers.draw();
 	lasers.check();
+	text_writer->drawText(&health_text, 6, 100, 100);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -258,7 +266,7 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(50, 50);
-	glutInitWindowSize(750, 750);
+	glutInitWindowSize(1600, 900);
 
 	main_window = glutCreateWindow("Space Invaders!");
 	glutDisplayFunc(myGlutDisplay);
