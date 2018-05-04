@@ -75,7 +75,6 @@ public:
 	}
 
 	void draw() {
-
 		//block width of each segment
 		int sec_0 = 1;
 		int sec_1 = 3;
