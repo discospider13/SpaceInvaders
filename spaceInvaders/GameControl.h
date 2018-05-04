@@ -142,6 +142,8 @@ public:
 				if (loopguard >= 0)
 				{
 					lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+					lasers.create(aliens.aliens.at(r)->loc_x - 0.5, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+					lasers.create(aliens.aliens.at(r)->loc_x + 0.5, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
 				}
 			}
 			shotclock = 75;
