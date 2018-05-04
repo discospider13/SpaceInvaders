@@ -262,11 +262,17 @@ void keyboardInput(unsigned char key, int x, int y)
 		break;
 	case 'a':
 		//move player left
-		player->move(player_speed, 1);
+		if (player->getLocX() > -4.5)
+		{
+			player->move(player_speed, 1);
+		}
 		break;
 	case 'd':
 		//move player right
-		player->move(player_speed, 0);
+		if (player->getLocX() < 4.5)
+		{
+			player->move(player_speed, 0);
+		}
 		break;
 	case 'w':
 		//move player up level

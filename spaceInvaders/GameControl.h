@@ -98,9 +98,18 @@ public:
 			for (int i = 0; i < diff; i++)
 			{
 				int r;
+				int loopguard = 20;
 				bool exit = false;
 				while (!exit)
 				{
+					if (loopguard < 0)
+					{
+						exit = true;
+					}
+					else
+					{
+						loopguard--;
+					}
 					r = rand() % aliens.aliens.size();
 					if (aliens.aliens.at(r)->toDraw)
 					{
@@ -110,7 +119,10 @@ public:
 						}
 					}
 				}
-				lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+				if (loopguard >= 0)
+				{
+					lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+				}
 			}
 			shotclock = 75;
 		}
