@@ -8,6 +8,7 @@
 #include "AlienTwo.h"
 #include "AlienThree.h"
 #include "laser.h"
+#include "Player.h"
 using namespace std;
 
 class AlienControl
@@ -61,7 +62,7 @@ public:
 		}
 	}
 	
-	void collide(vector<Laser>& lasers)
+	void collide(vector<Laser>& lasers, int& score)
 	{
 		for (int i = 0; i < aliens.size(); i++)
 		{
@@ -77,6 +78,7 @@ public:
 							{
 								aliens.at(i)->toDraw = false;
 								lasers.at(j).toDraw = false;
+								score += 1000;
 								return;
 							}
 						}
@@ -86,6 +88,7 @@ public:
 							{
 								aliens.at(i)->toDraw = false;
 								lasers.at(j).toDraw = false;
+								score += 50;
 								return;
 							}
 						}
@@ -94,7 +97,16 @@ public:
 			}
 		}
 	}
-	
+
+	void bossMove(Player* player)
+	{
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			aliens.at(i)->loc_y = player->getLocY();
+		}
+		move();
+	}
+
 	void move()
 	{
 		float movedist = dir * 0.05;

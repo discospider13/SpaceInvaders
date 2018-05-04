@@ -18,6 +18,7 @@ private:
 	int shotclock = 75;
 	int level = 0;
 	bool bossfight = false;
+	bool endboss = false;
 public:
 
 	void setDiff(int diff)
@@ -46,9 +47,27 @@ public:
 		return level;
 	}
 
-	bool checkEnd()
+	void setLevel(int level)
+	{
+		this->level = level;
+		if (level == 4)
+		{
+			bossfight = true;
+		}
+		else if (level > 4)
+		{
+			endboss = true;
+		}
+	}
+
+	bool isBossfight()
 	{
 		return bossfight;
+	}
+
+	bool checkEnd()
+	{
+		return endboss;
 	}
 
 	void spawnBoss(AlienControl& aliens)
@@ -61,11 +80,12 @@ public:
 		this->level++;
 		if (this->level == 4)
 		{
+			bossfight = true;
 			spawnBoss(aliens);
 		}
 		else if (this->level > 4)
 		{
-			bossfight = true;
+			endboss = true;
 		}
 		else
 		{
@@ -87,6 +107,48 @@ public:
 					aliens.spawn(i, -1, -2, 0);
 				}
 			}
+		}
+	}
+
+	void killboss(AlienControl& aliens, LaserControl& lasers, Player* player)
+	{
+		if (shotclock == 0)
+		{
+			srand(time(NULL));
+			for (int i = 0; i < diff; i++)
+			{
+				int r;
+				int loopguard = 20;
+				bool exit = false;
+				while (!exit)
+				{
+					if (loopguard < 0)
+					{
+						exit = true;
+					}
+					else
+					{
+						loopguard--;
+					}
+					r = rand() % aliens.aliens.size();
+					if (aliens.aliens.at(r)->toDraw)
+					{
+						if (aliens.aliens.at(r)->loc_x > player->getLocX() - 1.25 && aliens.aliens.at(r)->loc_x < player->getLocX() + 1.25)
+						{
+							exit = true;
+						}
+					}
+				}
+				if (loopguard >= 0)
+				{
+					lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+				}
+			}
+			shotclock = 75;
+		}
+		else
+		{
+			shotclock--;
 		}
 	}
 

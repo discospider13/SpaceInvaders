@@ -25,6 +25,7 @@ using namespace std;
 /** These are the live variables passed into GLUI ***/
 int  segmentsX = 1;
 int  segmentsY = 1;
+int score;
 bool inGame = false;
 int	 camRotU = 0;
 int	 camRotV = 0;
@@ -64,7 +65,7 @@ LaserControl lasers;
 AlienControl aliens;
 GameControl control;
 BarrierControl barriers;
-Stars* stars = new Stars(1.0, 1.0, 1.0, 1000);
+Stars* stars = new Stars(7.0, 7.0, 7.0, 1000);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -78,6 +79,7 @@ void callback_start(int id) {
 	control.spawn(aliens);
 	player->setLives(control.getDiff());
 	barriers.create(control.getDiff());
+	score = 0;
 	inGame = true;
 }
 
@@ -87,9 +89,11 @@ void callback_boss(int id)
 	{
 		control.setMode(id);
 		control.setDiff(setLevels + 1);
+		control.setLevel(4);
 		control.spawnBoss(aliens);
 		player->setLives(control.getDiff());
 		barriers.create(control.getDiff());
+		score = 0;
 		inGame = true;
 	}
 	else
@@ -99,6 +103,7 @@ void callback_boss(int id)
 		control.spawn(aliens);
 		player->setLives(control.getDiff());
 		barriers.create(control.getDiff());
+		score = 0;
 		inGame = true;
 	}
 }
@@ -183,15 +188,23 @@ void myGlutDisplay(void)
 		{
 			player->decLives();
 		}
-		aliens.collide(lasers.laserList);
+		aliens.collide(lasers.laserList, score);
 		barriers.collide(lasers.laserList);
 		barriers.draw();
 		player->draw();
 		player->decFire();
 		aliens.nextState();
-		aliens.move();
+		if (control.isBossfight())
+		{
+			aliens.bossMove(player);
+			control.killboss(aliens, lasers, player);
+		}
+		else
+		{
+			aliens.move();
+			control.shoot(aliens, lasers, player);
+		}
 		aliens.draw();
-		control.shoot(aliens, lasers, player);
 		lasers.move();
 		lasers.draw();
 	}
