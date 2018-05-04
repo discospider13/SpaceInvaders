@@ -52,6 +52,8 @@ string gameText4 = "Use space to fire your laser";
 string gameText5 = "Use 'q' and 'e' to rotate the camera";
 string gameText6 = "Thanks for playing!";
 string gameTextSpace = " ";
+string passText = "Enter Password: ";
+string password = "";
 int curLevel = 1;
 int setLevels = 0;
 
@@ -75,6 +77,28 @@ void callback_start(int id) {
 	player->setLives(control.getDiff());
 	barriers.create(control.getDiff());
 	inGame = true;
+}
+
+void callback_boss(int id)
+{
+	if (password == "epicboss")
+	{
+		control.setMode(id);
+		control.setDiff(setLevels + 1);
+		control.spawnBoss(aliens);
+		player->setLives(control.getDiff());
+		barriers.create(control.getDiff());
+		inGame = true;
+	}
+	else
+	{
+		control.setMode(id);
+		control.setDiff(setLevels + 1);
+		control.spawn(aliens);
+		player->setLives(control.getDiff());
+		barriers.create(control.getDiff());
+		inGame = true;
+	}
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -177,9 +201,14 @@ void myGlutDisplay(void)
 	{
 		inGame = false;
 	}
+	if (control.checkEnd())
+	{
+		inGame = false;
+	}
 	if (aliens.empty() && inGame)
 	{
 		aliens.aliens.clear();
+		lasers.laserList.clear();
 		control.spawn(aliens);
 	}
 	else if (control.getMode() == 1)
@@ -345,6 +374,8 @@ int main(int argc, char* argv[])
 	listbox->add_item(2, "Hard");
 
 	glui->add_statictext(gameTextSpace);
+	GLUI_EditText *pass = glui->add_edittext(passText, password, 0, callback_boss);
+	pass->set_w(100);
 	glui->add_statictext(gameTextSpace);
 
 	glui->add_button("Start Classic Mode", 0, callback_start);
