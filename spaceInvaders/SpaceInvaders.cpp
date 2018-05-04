@@ -19,6 +19,7 @@
 #include "AlienControl.h"
 #include "BarrierControl.h"
 #include "Stars.h"
+#include "Stats.h"
 
 using namespace std;
 
@@ -65,6 +66,7 @@ LaserControl lasers;
 AlienControl aliens;
 GameControl control;
 BarrierControl barriers;
+Stats* stats = new Stats();
 Stars* stars = new Stars(7.0, 7.0, 7.0, 1000);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
@@ -192,6 +194,9 @@ void myGlutDisplay(void)
 		barriers.collide(lasers.laserList);
 		barriers.draw();
 		player->draw();
+		stats->drawScore(player->getLocX(), player->getLocY(), player->getLocZ(), score);
+		stats->drawHealth(player->getLocX(), player->getLocY(), player->getLocZ(), player->getLives());
+		
 		player->decFire();
 		aliens.nextState();
 		if (control.isBossfight())

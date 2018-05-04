@@ -3,6 +3,9 @@
 
 #include <GL/glew.h>
 #include <freeglut.h>
+#include <iostream>
+
+using namespace std;
 
 class Stats {
 public:
@@ -79,123 +82,867 @@ public:
 
 	void drawScore(float x, float y, float z, int score) {
 		int val;
-		val = score % 10;
 
-		switch (val) {
-		case (0):
-			glPushMatrix();
-			glTranslatef(x, y + 2.0, z);
-			glColor3f(1.0, 1.0, 1.0);
-			glScalef(0.1, 0.1, 0.1);
+		int count = 0;
 
-			//top
+		do {
+			val = score % 10;
+			score /= 10;
+			//cout << val << endl;
+			//cout << score << endl;
+
 			glPushMatrix();
-			glTranslatef(-1.0, 3.0, 0.0);
-			for (int x = 0; x < 3; x++) {
+			switch (val) {
+			case (0):
 				glPushMatrix();
-				glTranslatef(x * 1.0, 0.0, 0.0);
-				glutSolidCube(1.0);
-				glPopMatrix();
-			}
-			glPopMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
 
-			glPushMatrix();
-			glTranslatef(-2.0, 2.0, 0.0);
-			for (int x = 0; x < 5; x++) {
-				if (x == 0 || x == 4) {
-					glPushMatrix();
-					glTranslatef(x * 1.0, 0.0, 0.0);
-					glutSolidCube(1.0);
-					glPopMatrix();
-				}
-			}
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(-2.0, 1.0, 0.0);
-			for (int x = 0; x < 5; x++) {
-				if (x == 0 || x >= 3) {
-					glPushMatrix();
-					glTranslatef(x * 1.0, 0.0, 0.0);
-					glutSolidCube(1.0);
-					glPopMatrix();
-				}
-			}
-			glPopMatrix();
-
-			//middle
-			glPushMatrix();
-			glTranslatef(-2.0, 0.0, 0.0);
-			for (int x = 0; x < 5; x++) {
-				if (x != 1 && x != 3) {
-					glPushMatrix();
-					glTranslatef(x * 1.0, 0.0, 0.0);
-					glutSolidCube(1.0);
-					glPopMatrix();
-				}
-			}
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(-2.0, -1.0, 0.0);
-			for (int x = 0; x < 5; x++) {
-				if (x <= 1 || x == 4) {
-					glPushMatrix();
-					glTranslatef(x * 1.0, 0.0, 0.0);
-					glutSolidCube(1.0);
-					glPopMatrix();
-				}
-			}
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(-2.0, -2.0, 0.0);
-			for (int x = 0; x < 5; x++) {
-				if (x == 0 || x == 4) {
-					glPushMatrix();
-					glTranslatef(x * 1.0, 0.0, 0.0);
-					glutSolidCube(1.0);
-					glPopMatrix();
-				}
-			}
-			glPopMatrix();
-
-			//bottom
-			glPushMatrix();
-			glTranslatef(-1.0, -3.0, 0.0);
-			for (int x = 0; x < 3; x++) {
+				//top
 				glPushMatrix();
-				glTranslatef(x * 1.0, 0.0, 0.0);
-				glutSolidCube(1.0);
+				glTranslatef(-1.0, 3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
 				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x >= 3) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-2.0, 0.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x != 1 && x != 3) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x <= 1 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPopMatrix();
+				break;
+			case (1):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(0.0, 3.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, 2.0, 0.0);
+				for (int x = 0; x < 2; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(0.0, 0.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.0, -2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (2):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-1.0, 3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(0.0, 0.0, 0.0);
+				for (int x = 0; x < 2; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-2.0, -3.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (3):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-2.0, 3.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, 2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(1.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(0.0, 0.0, 0.0);
+				for (int x = 0; x < 2; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (4):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(1.0, 3.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(0.0, 2.0, 0.0);
+				for (int x = 0; x < 2; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, 1.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					if (x != 1) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-2.0, 0.0, 0.0);
+				for (int x = 0; x < 4; x++) {
+					if (x == 0 || x == 3) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(1.0, -2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(1.0, -3.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (5):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-2.0, 3.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-1.0, 0.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (6):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(0.0, 3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, 2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-2.0, 0.0, 0.0);
+				for (int x = 0; x < 4; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (7):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-2.0, 3.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, 2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(1.0, 1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(0.0, 0.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-1.0, -2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+				glPopMatrix();
+				break;
+			case (8):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-1.0, 3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x >= 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-1.0, 0.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, -2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-1.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPopMatrix();
+				break;
+			case (9):
+				glPushMatrix();
+				glTranslatef(x, y + 3.5, z);
+				glColor3f(1.0, 1.0, 1.0);
+				glScalef(0.1, 0.1, 0.1);
+
+				//top
+				glPushMatrix();
+				glTranslatef(-1.0, 3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 2.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x == 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(-2.0, 1.0, 0.0);
+				for (int x = 0; x < 5; x++) {
+					if (x == 0 || x >= 4) {
+						glPushMatrix();
+						glTranslatef(x * 1.0, 0.0, 0.0);
+						glutSolidCube(1.0);
+						glPopMatrix();
+					}
+				}
+				glPopMatrix();
+
+				//middle
+				glPushMatrix();
+				glTranslatef(-1.0, 0.0, 0.0);
+				for (int x = 0; x < 4; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(2.0, -1.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(1.0, -2.0, 0.0);
+				for (int x = 0; x < 1; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				//bottom
+				glPushMatrix();
+				glTranslatef(-2.0, -3.0, 0.0);
+				for (int x = 0; x < 3; x++) {
+					glPushMatrix();
+					glTranslatef(x * 1.0, 0.0, 0.0);
+					glutSolidCube(1.0);
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				glPopMatrix();
+				break;
 			}
+			glTranslatef(1.5, 0.0, 0.0);
 			glPopMatrix();
-
-			glPopMatrix();
-
-
-
-			break;
-		case (1):
-			break;
-		case (2):
-			break;
-		case (3):
-			break;
-		case (4):
-			break;
-		case (5):
-			break;
-		case (6):
-			break;
-		case (7):
-			break;
-		case (8):
-			break;
-		case (9):
-			break;
-		}
-
+		} while (score > 0);
 	}
 	
 };
