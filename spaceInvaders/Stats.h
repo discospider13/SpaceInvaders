@@ -88,14 +88,11 @@ public:
 		do {
 			val = score % 10;
 			score /= 10;
-			//cout << val << endl;
-			//cout << score << endl;
-
-			glPushMatrix();
+			
 			switch (val) {
 			case (0):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -186,7 +183,7 @@ public:
 				break;
 			case (1):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -267,7 +264,7 @@ public:
 				break;
 			case (2):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -350,7 +347,7 @@ public:
 				break;
 			case (3):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -433,7 +430,7 @@ public:
 				break;
 			case (4):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -518,7 +515,7 @@ public:
 				break;
 			case (5):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -601,7 +598,7 @@ public:
 				break;
 			case (6):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -686,7 +683,7 @@ public:
 				break;
 			case (7):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -767,7 +764,7 @@ public:
 				break;
 			case (8):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -856,7 +853,7 @@ public:
 				break;
 			case (9):
 				glPushMatrix();
-				glTranslatef(x, y + 3.5, z);
+				glTranslatef(x + (count * -0.75), y + 3.5, z);
 				glColor3f(1.0, 1.0, 1.0);
 				glScalef(0.1, 0.1, 0.1);
 
@@ -940,8 +937,7 @@ public:
 				glPopMatrix();
 				break;
 			}
-			glTranslatef(1.5, 0.0, 0.0);
-			glPopMatrix();
+			count++;
 		} while (score > 0);
 	}
 	
