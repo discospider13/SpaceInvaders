@@ -51,6 +51,7 @@ int  main_window;
 string gameText1 = "Welcome to Space Invaders!";
 string gameText2 = "Controls:";
 string gameText3 = "Use 'a' and 'd' to move left and right";
+string gameText3b = "Use 'w' and 's' to move up and down (M/H)";
 string gameText4 = "Use space to fire your laser";
 string gameText5 = "Use 'q' and 'e' to rotate the camera";
 string gameText6 = "Thanks for playing!";
@@ -84,6 +85,11 @@ void callback_start(int id) {
 	score = 0;
 	inGame = true;
 }
+
+/*********************************************************
+callback_boss()
+Skip to boss level
+**********************************************************/
 
 void callback_boss(int id)
 {
@@ -183,6 +189,7 @@ void myGlutDisplay(void)
 
 	Matrix compositeMatrix;
 
+	//draw and play the game
 	if (inGame)
 	{
 		stars->draw();
@@ -255,6 +262,10 @@ void onExit()
 	delete camera;
 }
 
+/**************************************************************
+rotateCameraLeft
+Rotates the camera view
+***************************************************************/
 void rotateCameraLeft() {
 	camAngle++;
 	radAngle = (PI / 180) * camAngle;
@@ -262,6 +273,10 @@ void rotateCameraLeft() {
 	eyeX = sin(radAngle) * 6;
 }
 
+/**************************************************************
+rotateCameraLRight
+Rotates the camera view
+***************************************************************/
 void rotateCameraRight() {
 	camAngle--;
 	radAngle = (PI / 180) * camAngle;
@@ -269,6 +284,10 @@ void rotateCameraRight() {
 	eyeX = sin(radAngle) * 6;
 }
 
+/***************************************************************
+keyboardInput
+This function gets keyboard input from the player
+****************************************************************/
 void keyboardInput(unsigned char key, int x, int y)
 {
 	switch (key)
@@ -389,6 +408,7 @@ int main(int argc, char* argv[])
 	glui->add_statictext(gameTextSpace);
 	glui->add_statictext(gameText2);
 	glui->add_statictext(gameText3);
+	glui->add_statictext(gameText3b);
 	glui->add_statictext(gameText4);
 	glui->add_statictext(gameText5);
 	glui->add_statictext(gameTextSpace);
