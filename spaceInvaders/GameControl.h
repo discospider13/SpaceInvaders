@@ -1,6 +1,7 @@
 #ifndef GAMECONTROL_H
 #define GAMECONTROL_H
 #include "AlienControl.h"
+#include "LaserControl.h"
 #include "Alien.h"
 #include "AlienZero.h"
 #include "AlienOne.h"
@@ -14,6 +15,7 @@ class GameControl
 private:
 	int diff;
 	int gameMode;
+	int shotclock = 50;
 public:
 
 	void setDiff(int diff)
@@ -55,6 +57,33 @@ public:
 				aliens.spawn(i, -1, -4, 1);
 				aliens.spawn(i, -1, -2, 0);
 			}
+		}
+	}
+
+	void shoot(AlienControl& aliens, LaserControl& lasers)
+	{
+		if (shotclock == 0)
+		{
+			srand(time(NULL));
+			for (int i = 0; i < diff; i++)
+			{
+				int r;
+				bool exit = false;
+				while (!exit)
+				{
+					r = rand() % aliens.aliens.size();
+					if (aliens.aliens.at(r)->toDraw)
+					{
+						exit = true;
+					}
+				}
+				lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
+			}
+			shotclock = 50;
+		}
+		else
+		{
+			shotclock--;
 		}
 	}
 };

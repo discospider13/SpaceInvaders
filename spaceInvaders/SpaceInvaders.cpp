@@ -161,6 +161,7 @@ void myGlutDisplay(void)
 		aliens.nextState();
 		aliens.move();
 		aliens.draw();
+		control.shoot(aliens, lasers);
 		lasers.move();
 		lasers.draw();
 	}

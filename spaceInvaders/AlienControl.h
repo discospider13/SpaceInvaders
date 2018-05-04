@@ -72,7 +72,7 @@ public:
 		{
 			for (int j = 0; j < lasers.size(); j++, lit++)
 			{
-				if (lasers.at(j).locY == aliens.at(i)->loc_y && lasers.at(j).toDraw && aliens.at(i)->toDraw)
+				if (lasers.at(j).locY == aliens.at(i)->loc_y && lasers.at(j).toDraw && aliens.at(i)->toDraw && !lasers.at(j).dir)
 				{
 					if (lasers.at(j).locZ + 0.15 > aliens.at(i)->loc_z && lasers.at(j).locZ - 0.15 < aliens.at(i)->loc_z)
 					{
