@@ -16,10 +16,13 @@ private:
 	int diff;
 	int gameMode;
 	int shotclock = 75;
+	int level = 0;
+	bool bossfight = false;
 public:
 
 	void setDiff(int diff)
 	{
+		this->level = 0;
 		this->diff = diff;
 	}
 
@@ -38,24 +41,51 @@ public:
 		return gameMode;
 	}
 
+	int getLevel()
+	{
+		return level;
+	}
+
+	bool checkEnd()
+	{
+		return bossfight;
+	}
+
+	void spawnBoss(AlienControl& aliens)
+	{
+		aliens.spawn(0, 0, -6, 3);
+	}
+
 	void spawn(AlienControl& aliens)
 	{
-		for (float i = -4.5; i < 5; i += 1.5)
+		this->level++;
+		if (this->level == 4)
 		{
-			switch (diff)
+			spawnBoss(aliens);
+		}
+		else if (this->level > 4)
+		{
+			bossfight = true;
+		}
+		else
+		{
+			for (float i = -4.5; i < 5; i += 1.5)
 			{
-			case 3:
-				aliens.spawn(i, 1, -6, 2);
-				aliens.spawn(i, 1, -4, 1);
-				aliens.spawn(i, 1, -2, 0);
-			case 2:
-				aliens.spawn(i, 0, -6, 2);
-				aliens.spawn(i, 0, -4, 1);
-				aliens.spawn(i, 0, -2, 0);
-			case 1:
-				aliens.spawn(i, -1, -6, 2);
-				aliens.spawn(i, -1, -4, 1);
-				aliens.spawn(i, -1, -2, 0);
+				switch (diff)
+				{
+				case 3:
+					aliens.spawn(i, 1, -6, 2);
+					aliens.spawn(i, 1, -4, 1);
+					aliens.spawn(i, 1, -2, 0);
+				case 2:
+					aliens.spawn(i, 0, -6, 2);
+					aliens.spawn(i, 0, -4, 1);
+					aliens.spawn(i, 0, -2, 0);
+				case 1:
+					aliens.spawn(i, -1, -6, 2);
+					aliens.spawn(i, -1, -4, 1);
+					aliens.spawn(i, -1, -2, 0);
+				}
 			}
 		}
 	}
