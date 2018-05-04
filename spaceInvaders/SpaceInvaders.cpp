@@ -18,6 +18,7 @@
 #include "LaserControl.h"
 #include "AlienControl.h"
 #include "BarrierControl.h"
+#include "Stars.h"
 
 using namespace std;
 
@@ -63,6 +64,7 @@ LaserControl lasers;
 AlienControl aliens;
 GameControl control;
 BarrierControl barriers;
+Stars* stars = new Stars(1.0, 1.0, 1.0, 1000);
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -176,6 +178,7 @@ void myGlutDisplay(void)
 
 	if (inGame)
 	{
+		stars->draw();
 		if (player->collide(lasers.laserList))
 		{
 			player->decLives();

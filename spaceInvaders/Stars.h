@@ -11,6 +11,7 @@ class Stars : public Shape {
 private:
 	int num;
 	float min_x, min_y, min_z;
+
 public:
 	Stars(float x, float y, float z, int n) {
 		this->min_x = x;
