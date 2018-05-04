@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	void shoot(AlienControl& aliens, LaserControl& lasers)
+	void shoot(AlienControl& aliens, LaserControl& lasers, Player* player)
 	{
 		if (shotclock == 0)
 		{
@@ -74,7 +74,10 @@ public:
 					r = rand() % aliens.aliens.size();
 					if (aliens.aliens.at(r)->toDraw)
 					{
-						exit = true;
+						if (aliens.aliens.at(r)->loc_x > player->getLocX() - 1.25 && aliens.aliens.at(r)->loc_x < player->getLocX() + 1.25)
+						{
+							exit = true;
+						}
 					}
 				}
 				lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);

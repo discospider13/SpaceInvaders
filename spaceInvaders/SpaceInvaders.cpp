@@ -159,7 +159,6 @@ void myGlutDisplay(void)
 		if (player->collide(lasers.laserList))
 		{
 			player->decLives();
-			cout << "Lives: " << player->getLives() << endl;
 		}
 		aliens.collide(lasers.laserList);
 		player->draw();
@@ -167,7 +166,7 @@ void myGlutDisplay(void)
 		aliens.nextState();
 		aliens.move();
 		aliens.draw();
-		control.shoot(aliens, lasers);
+		control.shoot(aliens, lasers, player);
 		lasers.move();
 		lasers.draw();
 	}
