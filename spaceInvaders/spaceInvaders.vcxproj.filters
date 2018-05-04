@@ -66,6 +66,9 @@
     <ClInclude Include="Stats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BarrierControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Stars.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -187,8 +187,7 @@ public:
 	bool collide(vector<Laser>& lasers)
 	{
 		bool hit = false;
-		vector<Laser>::iterator lit = lasers.begin();
-		for (int i = 0; i < lasers.size(); i++, lit++)
+		for (int i = 0; i < lasers.size(); i++)
 		{
 			if (lasers.at(i).dir && lasers.at(i).toDraw && lasers.at(i).locY == this->loc_y)
 			{

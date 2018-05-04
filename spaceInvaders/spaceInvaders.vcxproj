@@ -27,6 +27,7 @@
     <ClInclude Include="AlienTwo.h" />
     <ClInclude Include="AlienZero.h" />
     <ClInclude Include="Barrier.h" />
+    <ClInclude Include="BarrierControl.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GameControl.h" />
