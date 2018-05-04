@@ -73,10 +73,8 @@ Camera* camera = new Camera();
 void setupCamera();
 
 void callback_start(int id) {
-	control.diff = setLevels;
-	aliens.spawn(0, -1, -2, 0);
-	aliens.spawn(0, 0, -2, 1);
-	aliens.spawn(0, 1, -2, 2);
+	control.setDiff(setLevels + 1);
+	control.spawn(aliens);
 }
 
 /***************************************** myGlutIdle() ***********/
@@ -160,7 +158,10 @@ void myGlutDisplay(void)
 	aliens.draw();
 	lasers.move();
 	lasers.draw();
-	lasers.check();
+	if (aliens.empty())
+	{
+		control.spawn(aliens);
+	}
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -216,7 +217,7 @@ void keyboardInput(unsigned char key, int x, int y)
 		break;
 	case 'w':
 		//move player up level
-		if (curLevel < control.diff)
+		if (curLevel < control.getDiff())
 		{
 			curLevel++;
 			float temp = player->getLocY();
@@ -258,7 +259,7 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(50, 50);
-	glutInitWindowSize(750, 750);
+	glutInitWindowSize(1600, 900);
 
 	main_window = glutCreateWindow("Space Invaders!");
 	glutDisplayFunc(myGlutDisplay);
@@ -315,9 +316,9 @@ int main(int argc, char* argv[])
 	glui->add_statictext(gameTextSpace);
 
 	GLUI_Listbox *listbox = glui->add_listbox("Set difficulty", &setLevels);
-	listbox->add_item(1, "Easy");
-	listbox->add_item(2, "Medium");
-	listbox->add_item(3, "Hard");
+	listbox->add_item(0, "Easy");
+	listbox->add_item(1, "Medium");
+	listbox->add_item(2, "Hard");
 
 	glui->add_statictext(gameTextSpace);
 	glui->add_statictext(gameTextSpace);
