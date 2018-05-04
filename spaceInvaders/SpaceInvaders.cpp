@@ -155,6 +155,7 @@ void myGlutDisplay(void)
 	//barrier->draw();
 	if (inGame)
 	{
+		inGame = !player->collide(lasers.laserList); // Change to make lives
 		aliens.collide(lasers.laserList);
 		player->draw();
 		player->decFire();
@@ -164,6 +165,11 @@ void myGlutDisplay(void)
 		control.shoot(aliens, lasers);
 		lasers.move();
 		lasers.draw();
+	}
+	else
+	{
+		aliens.aliens.clear();
+		lasers.laserList.clear();
 	}
 	if (aliens.empty() && inGame)
 	{

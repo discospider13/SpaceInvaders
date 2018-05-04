@@ -2,6 +2,9 @@
 #define PLAYER_H
 
 #include "Shape.h"
+#include "Laser.h"
+#include <vector>
+using namespace std;
 
 enum MOVE_DIRECTION {
 	MV_RT = 0,
@@ -154,6 +157,28 @@ public:
 
 	float getLocZ() {
 		return this->loc_z;
+	}
+
+	bool collide(vector<Laser>& lasers)
+	{
+		bool hit = false;
+		vector<Laser>::iterator lit = lasers.begin();
+		for (int i = 0; i < lasers.size(); i++, lit++)
+		{
+			if (lasers.at(i).dir && lasers.at(i).toDraw && lasers.at(i).locY == this->loc_y)
+			{
+				if (lasers.at(i).locZ + 0.15 > this->loc_z && lasers.at(i).locZ - 0.15 < this->loc_z)
+				{
+					if (lasers.at(i).locX > this->loc_x - 0.75 && lasers.at(i).locX < this->loc_x + 0.75)
+					{
+						hit = true;
+						lasers.at(i).toDraw = false;
+						return hit;
+					}
+				}
+			}
+		}
+		return hit;
 	}
 };
 
