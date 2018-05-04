@@ -17,11 +17,7 @@
 #include "GameControl.h"
 #include "LaserControl.h"
 #include "AlienControl.h"
-#include "Alien.h"
-#include "AlienZero.h"
-#include "AlienOne.h"
-#include "AlienTwo.h"
-#include "Barrier.h"
+#include "BarrierControl.h"
 
 using namespace std;
 
@@ -42,7 +38,7 @@ float lookX = -2;
 float lookY = -2;
 float lookZ = -2;
 
-float player_speed = 0.075;
+float player_speed = 0.125;
 float player_x = 0.0;
 float player_y = -1.0;
 float player_z = 2.0;
@@ -64,7 +60,7 @@ Cube* cube = new Cube();
 LaserControl lasers;
 AlienControl aliens;
 GameControl control;
-Barrier* barrier = new Barrier(1, 1, 1, 5);
+BarrierControl barriers;
 Plane* plane = new Plane(10.0, 0.1, 10.0);
 Player* player = new Player(player_x, player_y, player_z, player_speed);
 Shape* shape = NULL;
@@ -77,6 +73,7 @@ void callback_start(int id) {
 	control.setDiff(setLevels + 1);
 	control.spawn(aliens);
 	player->setLives(control.getDiff());
+	barriers.create(control.getDiff());
 	inGame = true;
 }
 
@@ -153,7 +150,6 @@ void myGlutDisplay(void)
 
 	Matrix compositeMatrix;
 
-	//barrier->draw();
 	if (inGame)
 	{
 		if (player->collide(lasers.laserList))
@@ -161,6 +157,8 @@ void myGlutDisplay(void)
 			player->decLives();
 		}
 		aliens.collide(lasers.laserList);
+		barriers.collide(lasers.laserList);
+		barriers.draw();
 		player->draw();
 		player->decFire();
 		aliens.nextState();

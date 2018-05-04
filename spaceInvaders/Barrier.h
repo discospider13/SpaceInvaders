@@ -4,12 +4,12 @@
 #include "Shape.h"
 
 class Barrier : public Shape {
-private:
+public:
 	int max_hits, hits;
+	bool toDraw;
 	float loc_x, loc_y, loc_z;
 	float r, g, b;
 
-public:
 	Barrier(float x, float y, float z, int hits) {
 		this->loc_x = x;
 		this->loc_y = y;
@@ -17,14 +17,15 @@ public:
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 0.0;
+		this->toDraw = true;
 		this->max_hits = hits;
 		this->hits = 0;
 	}
 
 	void draw() {
 		glPushMatrix();
-		glScalef(0.1, 0.1, 0.1);
 		glTranslatef(this->loc_x, this->loc_y, this->loc_z);
+		glScalef(0.1, 0.1, 0.1);
 		glColor3f((this->r + this->hits * (1.0/this->max_hits)), (this->g - this->hits * (1.0/this->max_hits)), this->b);
 
 		for (int z = 0; z < (this->max_hits - this->hits); z++) {
@@ -118,11 +119,13 @@ public:
 	bool hit() {
 		this->hits++;
 		if (this->hits < this->max_hits) {
-			draw();
 			return false;
 		}
 		else
+		{
+			toDraw = false;
 			return true;
+		}
 	}
 
 	void drawNormal() {}

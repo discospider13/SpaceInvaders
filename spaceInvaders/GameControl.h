@@ -15,7 +15,7 @@ class GameControl
 private:
 	int diff;
 	int gameMode;
-	int shotclock = 50;
+	int shotclock = 75;
 public:
 
 	void setDiff(int diff)
@@ -82,7 +82,7 @@ public:
 				}
 				lasers.create(aliens.aliens.at(r)->loc_x, aliens.aliens.at(r)->loc_y, aliens.aliens.at(r)->loc_z, true);
 			}
-			shotclock = 50;
+			shotclock = 75;
 		}
 		else
 		{

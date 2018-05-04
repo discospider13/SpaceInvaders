@@ -14,8 +14,6 @@ class AlienControl
 {
 public:
 	vector<Alien*> aliens;
-	vector<Alien*>::iterator it;
-	vector<Laser>::iterator lit;
 	int respawnTime = 300;
 	int dir = -1;
 	float dist = 0.0;
@@ -65,12 +63,9 @@ public:
 	
 	void collide(vector<Laser>& lasers)
 	{
-		bool exit = false;
-		it = aliens.begin();
-		lit = lasers.begin();
-		for (int i = 0; i < aliens.size(); i++, it++)
+		for (int i = 0; i < aliens.size(); i++)
 		{
-			for (int j = 0; j < lasers.size(); j++, lit++)
+			for (int j = 0; j < lasers.size(); j++)
 			{
 				if (lasers.at(j).locY == aliens.at(i)->loc_y && lasers.at(j).toDraw && aliens.at(i)->toDraw && !lasers.at(j).dir)
 				{
