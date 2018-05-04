@@ -36,6 +36,7 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Stars.h" />
     <ClInclude Include="Stats.h" />
   </ItemGroup>
   <ItemGroup>
