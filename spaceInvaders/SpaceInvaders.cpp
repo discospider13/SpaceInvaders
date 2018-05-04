@@ -45,7 +45,7 @@ float lookZ = -2;
 float player_speed = 0.075;
 float player_x = 0.0;
 float player_y = -1.0;
-float player_z = 0.0;
+float player_z = 2.0;
 
 /** These are GLUI control panel objects ***/
 int  main_window;
@@ -112,8 +112,8 @@ void myGlutReshape(int x, int y)
 void setupCamera()
 {
 	camera->Reset();  //note that this is a new function. Be sure to set values for near and far plane!
-	camera->SetViewAngle(50);
-	camera->Orient(Point(0, 2, 5), Point(0, 0, 0), Vector(0, 1, 0));
+	camera->SetViewAngle(70);
+	camera->Orient(Point(0, 2, 6), Point(0, 0, -1), Vector(0, 1, 0));
 
 	viewAngle = camera->GetViewAngle();
 	Point eyeP = camera->GetEyePoint();
@@ -153,13 +153,17 @@ void myGlutDisplay(void)
 	Matrix compositeMatrix;
 
 	//barrier->draw();
-	aliens.collide(lasers.laserList);
-	player->draw();
-	player->decFire();
-	aliens.nextState();
-	aliens.draw();
-	lasers.move();
-	lasers.draw();
+	if (inGame)
+	{
+		aliens.collide(lasers.laserList);
+		player->draw();
+		player->decFire();
+		aliens.nextState();
+		aliens.move();
+		aliens.draw();
+		lasers.move();
+		lasers.draw();
+	}
 	if (aliens.empty() && inGame)
 	{
 		aliens.aliens.clear();
@@ -191,15 +195,15 @@ void onExit()
 void rotateCameraLeft() {
 	camAngle++;
 	radAngle = (PI / 180) * camAngle;
-	eyeZ = cos(radAngle) * 5;
-	eyeX = sin(radAngle) * 5;
+	eyeZ = cos(radAngle) * 6;
+	eyeX = sin(radAngle) * 6;
 }
 
 void rotateCameraRight() {
 	camAngle--;
 	radAngle = (PI / 180) * camAngle;
-	eyeZ = cos(radAngle) * 5;
-	eyeX = sin(radAngle) * 5;
+	eyeZ = cos(radAngle) * 6;
+	eyeX = sin(radAngle) * 6;
 }
 
 void keyboardInput(unsigned char key, int x, int y)

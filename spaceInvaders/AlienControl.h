@@ -17,6 +17,8 @@ public:
 	vector<Alien*>::iterator it;
 	vector<Laser>::iterator lit;
 	int respawnTime = 300;
+	int dir = -1;
+	float dist = 0.0;
 
 	void spawn(float x, float y, float z, int id)
 	{
@@ -98,6 +100,28 @@ public:
 		}
 	}
 	
+	void move()
+	{
+		float movedist = dir * 0.05;
+		if (movedist + dist > 2)
+		{
+			dist = 2 * dir;
+			dir *= -1;
+			movedist = dir * 0.05;
+		}
+		else if (abs(movedist) + abs(dist) > 2)
+		{
+			dist = 2 * dir;
+			dir *= -1;
+			movedist = dir * 0.05;
+		}
+		dist += movedist;
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			aliens.at(i)->loc_x += movedist;
+		}
+	}
+
 	bool empty()
 	{
 		bool empty = true;

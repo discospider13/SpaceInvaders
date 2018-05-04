@@ -38,7 +38,7 @@ public:
 
 	void spawn(AlienControl& aliens)
 	{
-		for (int i = -3; i < 4; i++)
+		for (float i = -4.5; i < 5; i += 1.5)
 		{
 			switch (diff)
 			{
