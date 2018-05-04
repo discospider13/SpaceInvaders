@@ -18,6 +18,7 @@ private:
 	float loc_x, loc_y, loc_z;
 	float r, g, b;
 	float speed;
+	int lives;
 	int canFire = 0;
 
 public:
@@ -28,7 +29,31 @@ public:
 		this->r = 0.0;
 		this->g = 1.0;
 		this->b = 0.0;
+		this->lives = 5;
 		this->speed = speed;
+	}
+
+	int getLives()
+	{
+		return lives;
+	}
+
+	void setLives(int diff)
+	{
+		switch (diff)
+		{
+		case 1: this->lives = 5;
+			break;
+		case 2: this->lives = 4;
+			break;
+		case 3: this->lives = 3;
+			break;
+		}
+	}
+
+	void decLives()
+	{
+		this->lives--;
 	}
 
 	int getNumFire()

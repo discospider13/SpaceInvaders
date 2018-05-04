@@ -76,6 +76,7 @@ void callback_start(int id) {
 	control.setMode(id);
 	control.setDiff(setLevels + 1);
 	control.spawn(aliens);
+	player->setLives(control.getDiff());
 	inGame = true;
 }
 
@@ -155,7 +156,11 @@ void myGlutDisplay(void)
 	//barrier->draw();
 	if (inGame)
 	{
-		inGame = !player->collide(lasers.laserList); // Change to make lives
+		if (player->collide(lasers.laserList))
+		{
+			player->decLives();
+			cout << "Lives: " << player->getLives() << endl;
+		}
 		aliens.collide(lasers.laserList);
 		player->draw();
 		player->decFire();
@@ -170,6 +175,10 @@ void myGlutDisplay(void)
 	{
 		aliens.aliens.clear();
 		lasers.laserList.clear();
+	}
+	if (player->getLives() <= 0)
+	{
+		inGame = false;
 	}
 	if (aliens.empty() && inGame)
 	{
